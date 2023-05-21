@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA094625-19E9-4B1A-983B-084A3D09C204}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BankStatementAnalyzer.Repository</RootNamespace>
+    <AssemblyName>BankStatementAnalyzer.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\GenericRepository.cs" />
+    <Compile Include="Common\IGenericRepository.cs" />
+    <Compile Include="Common\DeliveryManagermentContext.cs" />
+    <Compile Include="Datatables\FieldSortOrder.cs" />
+    <Compile Include="Datatables\ISortCriteria.cs" />
+    <Compile Include="Datatables\Page.cs" />
+    <Compile Include="Datatables\PagedListResult.cs" />
+    <Compile Include="Datatables\QueryExtensions.cs" />
+    <Compile Include="Datatables\SearchQuery.cs" />
+    <Compile Include="Impl\BannerImagesRepository.cs" />
+    <Compile Include="Impl\BannersRepository.cs" />
+    <Compile Include="Impl\BestDealRepository.cs" />
+    <Compile Include="Impl\CarouselRepository.cs" />
+    <Compile Include="Impl\ClassifiedArticleCategoryRepository.cs" />
+    <Compile Include="Impl\ClassifiedArticleImagesRepository.cs" />
+    <Compile Include="Impl\ClassifiedArticleKeywordsRepository.cs" />
+    <Compile Include="Impl\ClassifiedArticleRepository.cs" />
+    <Compile Include="Impl\ClassifiedCategoryRepository.cs" />
+    <Compile Include="Impl\ClassifiedContactsRepository.cs" />
+    <Compile Include="Impl\ClassifiedImagesRepository.cs" />
+    <Compile Include="Impl\ClassifiedKeywordsRepository.cs" />
+    <Compile Include="Impl\ClassifiedRatingRepository.cs" />
+    <Compile Include="Impl\ClassifiedRepository.cs" />
+    <Compile Include="Impl\ColorsRepository.cs" />
+    <Compile Include="Impl\CustomerLikesRepository.cs" />
+    <Compile Include="Impl\CustomerNotificationRepository.cs" />
+    <Compile Include="Impl\HomeScreenLayoutRepository.cs" />
+    <Compile Include="Impl\IconsRepository.cs" />
+    <Compile Include="Impl\OrderVendorMappingRepository.cs" />
+    <Compile Include="Impl\PackageCouponMappingRepository.cs" />
+    <Compile Include="Impl\RateCardRepository.cs" />
+    <Compile Include="Impl\ServiceTypeRepository.cs" />
+    <Compile Include="Impl\ClothsRepository.cs" />
+    <Compile Include="Impl\PackageRepository.cs" />
+    <Compile Include="Impl\OrderTypeRepository.cs" />
+    <Compile Include="Impl\AppMessageRepository.cs" />
+    <Compile Include="Impl\CouponRepository.cs" />
+    <Compile Include="Impl\CustomerCreditHistoryRepository.cs" />
+    <Compile Include="Impl\CustomerCreditMappingRepository.cs" />
+    <Compile Include="Impl\CustomerRefferalCodeMappingRepository.cs" />
+    <Compile Include="Impl\DeliveryBoyRepository.cs" />
+    <Compile Include="Impl\OrderStatusMappingRepository.cs" />
+    <Compile Include="Impl\ReturnRequestDeliveryBoyMappingRepository.cs" />
+    <Compile Include="Impl\OrderDelvieryBoyMappingRepository.cs" />
+    <Compile Include="Impl\PaymentRepository.cs" />
+    <Compile Include="Impl\AddressRepository.cs" />
+    <Compile Include="Impl\AreaManagerRepository.cs" />
+    <Compile Include="Impl\CategoryRepository.cs" />
+    <Compile Include="Impl\CityRepository.cs" />
+    <Compile Include="Impl\CompanyRepository.cs" />
+    <Compile Include="Impl\ComplaintRepository.cs" />
+    <Compile Include="Impl\CustomerRepository.cs" />
+    <Compile Include="Impl\EmailRepository.cs" />
+    <Compile Include="Impl\GalleryRepository.cs" />
+    <Compile Include="Impl\ImageCategoryRepository.cs" />
+    <Compile Include="Impl\MenuRepository.cs" />
+    <Compile Include="Impl\ActionRepository .cs" />
+    <Compile Include="Impl\OrderDetailRepository.cs" />
+    <Compile Include="Impl\OrderRepository.cs" />
+    <Compile Include="Impl\PageManagerRepository.cs" />
+    <Compile Include="Impl\ProductRepository.cs" />
+    <Compile Include="Impl\PushNotificationRepository.cs" />
+    <Compile Include="Impl\ReturnRequestRepository.cs" />
+    <Compile Include="Impl\StoreRepository.cs" />
+    <Compile Include="Impl\StreetRepository.cs" />
+    <Compile Include="Impl\StyleTraitValueProductRepository.cs" />
+    <Compile Include="Impl\StyleTraitValueRepository.cs" />
+    <Compile Include="Impl\StyleTraitRepository.cs" />
+    <Compile Include="Impl\StyleClassRepository.cs" />
+    <Compile Include="Impl\SubCategoryRepository.cs" />
+    <Compile Include="Impl\SupportAndFAQRepository.cs" />
+    <Compile Include="Impl\SystemSettingRepository.cs" />
+    <Compile Include="Impl\FileMasterRepository.cs" />
+    <Compile Include="Impl\PermissionMasterRepository.cs" />
+    <Compile Include="Impl\RoleMasterRepository.cs" />
+    <Compile Include="Impl\TimeSlotRepository.cs" />
+    <Compile Include="Impl\UndeliveryReasonRepository.cs" />
+    <Compile Include="Impl\UnitOfMeasureRepository.cs" />
+    <Compile Include="Impl\UserCompanyMappingRepository.cs" />
+    <Compile Include="Impl\UserMasterRepository.cs" />
+    <Compile Include="Impl\VendorRepository.cs" />
+    <Compile Include="Impl\WalletRepository.cs" />
+    <Compile Include="Interface\IBestDealRepository.cs" />
+    <Compile Include="Interface\ICarouselRepository.cs" />
+    <Compile Include="Interface\IClassifiedArticleCategoryRepository.cs" />
+    <Compile Include="Interface\IClassifiedArticleImagesRepository.cs" />
+    <Compile Include="Interface\IClassifiedArticleKeywordsRepository.cs" />
+    <Compile Include="Interface\IClassifiedArticleRepository.cs" />
+    <Compile Include="Interface\IClassifiedCategoryRepository.cs" />
+    <Compile Include="Interface\IClassifiedContactsRepository.cs" />
+    <Compile Include="Interface\IClassifiedImagesRepository.cs" />
+    <Compile Include="Interface\IClassifiedKeywordsRepository.cs" />
+    <Compile Include="Interface\IClassifiedRatingRepository.cs" />
+    <Compile Include="Interface\IClassifiedRepository.cs" />
+    <Compile Include="Interface\IBannerImagesRepository.cs" />
+    <Compile Include="Interface\IBannersRepository.cs" />
+    <Compile Include="Interface\IColorsRepository.cs" />
+    <Compile Include="Interface\ICustomerLikesRepository.cs" />
+    <Compile Include="Interface\ICustomerNotificationRepository.cs" />
+    <Compile Include="Interface\IHomeScreenLayoutRepository.cs" />
+    <Compile Include="Interface\IIconsRepository.cs" />
+    <Compile Include="Interface\IOrderVendorMappingRepository.cs" />
+    <Compile Include="Interface\IPackageCouponMappingRepository.cs" />
+    <Compile Include="Interface\IRateCardRepository.cs" />
+    <Compile Include="Interface\IServiceTypeRepository.cs" />
+    <Compile Include="Interface\IClothRepository.cs" />
+    <Compile Include="Interface\IPackageRepository.cs" />
+    <Compile Include="Interface\IOrderTypeRepository.cs" />
+    <Compile Include="Interface\IAppMessageRepository.cs" />
+    <Compile Include="Interface\ICouponRepository.cs" />
+    <Compile Include="Interface\ICustomerCreditMappingRepository.cs" />
+    <Compile Include="Interface\ICustomerCreditHistoryRepository.cs" />
+    <Compile Include="Interface\ICustomerRefferalCodeMappingRepository.cs" />
+    <Compile Include="Interface\IDeliveryBoyRepository.cs" />
+    <Compile Include="Interface\IOrderStatusMappingRepository.cs" />
+    <Compile Include="Interface\IReturnRequestDeliveryBoyMappingRepository.cs" />
+    <Compile Include="Interface\IOrderDelvieryBoyMappingRepository.cs" />
+    <Compile Include="Interface\IPaymentRepository.cs" />
+    <Compile Include="Interface\IAddressRepository.cs" />
+    <Compile Include="Interface\IAreaManagerRepository.cs" />
+    <Compile Include="Interface\ICategoryRepository.cs" />
+    <Compile Include="Interface\ICityRepository.cs" />
+    <Compile Include="Interface\ICompanyRepository.cs" />
+    <Compile Include="Interface\IComplaintRepository.cs" />
+    <Compile Include="Interface\ICustomerRepository.cs" />
+    <Compile Include="Interface\IEmailRepository.cs" />
+    <Compile Include="Interface\IGalleryRepository.cs" />
+    <Compile Include="Interface\IImageCategoryRepository.cs" />
+    <Compile Include="Interface\IMenuRepository.cs" />
+    <Compile Include="Interface\IActionRepository.cs" />
+    <Compile Include="Interface\IOrderDetailRepository.cs" />
+    <Compile Include="Interface\IOrderRepository.cs" />
+    <Compile Include="Interface\IPageManagerRepository.cs" />
+    <Compile Include="Interface\IProductRepository.cs" />
+    <Compile Include="Interface\IPushNotificationRepository.cs" />
+    <Compile Include="Interface\IReturnRequestRepository.cs" />
+    <Compile Include="Interface\IStoreRepository.cs" />
+    <Compile Include="Interface\IStreetRepository.cs" />
+    <Compile Include="Interface\IStyleTraitValueProductRepository.cs" />
+    <Compile Include="Interface\IStyleTraitValueRepository.cs" />
+    <Compile Include="Interface\IStyleTraitRepository.cs" />
+    <Compile Include="Interface\IStyleClassRepository.cs" />
+    <Compile Include="Interface\ISubCategoryRepository.cs" />
+    <Compile Include="Interface\ISupportAndFAQRepository.cs" />
+    <Compile Include="Interface\ISystemSettingRepository.cs" />
+    <Compile Include="Interface\IFileMasterRepository.cs" />
+    <Compile Include="Interface\IPermissionMasterRepository.cs" />
+    <Compile Include="Interface\IRoleMasterRepository.cs" />
+    <Compile Include="Interface\ITimeSlotRepository.cs" />
+    <Compile Include="Interface\IUndeliveryReasonRepository.cs" />
+    <Compile Include="Interface\IUnitOfMeasureRepository.cs" />
+    <Compile Include="Interface\IUserCompanyMappingRepository.cs" />
+    <Compile Include="Interface\IUserMasterRepository.cs" />
+    <Compile Include="Interface\IVendorRepository.cs" />
+    <Compile Include="Interface\IWalletRepository.cs" />
+    <Compile Include="Migrations\202009231822091_Initial.cs" />
+    <Compile Include="Migrations\202009231822091_Initial.Designer.cs">
+      <DependentUpon>202009231822091_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010091504112_RemovedCompanyIdFromBaseModel.cs" />
+    <Compile Include="Migrations\202010091504112_RemovedCompanyIdFromBaseModel.Designer.cs">
+      <DependentUpon>202010091504112_RemovedCompanyIdFromBaseModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010211930098_AddedMasters.cs" />
+    <Compile Include="Migrations\202010211930098_AddedMasters.Designer.cs">
+      <DependentUpon>202010211930098_AddedMasters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010261922302_AddedColumnClothId.cs" />
+    <Compile Include="Migrations\202010261922302_AddedColumnClothId.Designer.cs">
+      <DependentUpon>202010261922302_AddedColumnClothId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010272043588_Test.cs" />
+    <Compile Include="Migrations\202010272043588_Test.Designer.cs">
+      <DependentUpon>202010272043588_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010272046002_NewTest.cs" />
+    <Compile Include="Migrations\202010272046002_NewTest.Designer.cs">
+      <DependentUpon>202010272046002_NewTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010291956464_UpdatedTables.cs" />
+    <Compile Include="Migrations\202010291956464_UpdatedTables.Designer.cs">
+      <DependentUpon>202010291956464_UpdatedTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010292048070_AddedRelationInCloth.cs" />
+    <Compile Include="Migrations\202010292048070_AddedRelationInCloth.Designer.cs">
+      <DependentUpon>202010292048070_AddedRelationInCloth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011021307227_AddedNewColumnInOrder.cs" />
+    <Compile Include="Migrations\202011021307227_AddedNewColumnInOrder.Designer.cs">
+      <DependentUpon>202011021307227_AddedNewColumnInOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011041649521_NewTableAddedForPackageMapping.cs" />
+    <Compile Include="Migrations\202011041649521_NewTableAddedForPackageMapping.Designer.cs">
+      <DependentUpon>202011041649521_NewTableAddedForPackageMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011041714073_AddedNewColumnInPackage.cs" />
+    <Compile Include="Migrations\202011041714073_AddedNewColumnInPackage.Designer.cs">
+      <DependentUpon>202011041714073_AddedNewColumnInPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011080801396_AddedVendorMaster.cs" />
+    <Compile Include="Migrations\202011080801396_AddedVendorMaster.Designer.cs">
+      <DependentUpon>202011080801396_AddedVendorMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011142057268_AddedNewColumnAddress.cs" />
+    <Compile Include="Migrations\202011142057268_AddedNewColumnAddress.Designer.cs">
+      <DependentUpon>202011142057268_AddedNewColumnAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011161107079_AddedCouponRelationWithOrder.cs" />
+    <Compile Include="Migrations\202011161107079_AddedCouponRelationWithOrder.Designer.cs">
+      <DependentUpon>202011161107079_AddedCouponRelationWithOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012012050394_AddedColumnEstimatedDate.cs" />
+    <Compile Include="Migrations\202012012050394_AddedColumnEstimatedDate.Designer.cs">
+      <DependentUpon>202012012050394_AddedColumnEstimatedDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012031950085_AddedColumnRemarkInOrderDetails.cs" />
+    <Compile Include="Migrations\202012031950085_AddedColumnRemarkInOrderDetails.Designer.cs">
+      <DependentUpon>202012031950085_AddedColumnRemarkInOrderDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012072226519_AddedColumnKeyInOrderType.cs" />
+    <Compile Include="Migrations\202012072226519_AddedColumnKeyInOrderType.Designer.cs">
+      <DependentUpon>202012072226519_AddedColumnKeyInOrderType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012132101076_AddedColumnsInPackageTable.cs" />
+    <Compile Include="Migrations\202012132101076_AddedColumnsInPackageTable.Designer.cs">
+      <DependentUpon>202012132101076_AddedColumnsInPackageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012132219520_AddedTableVendorOrderMapping.cs" />
+    <Compile Include="Migrations\202012132219520_AddedTableVendorOrderMapping.Designer.cs">
+      <DependentUpon>202012132219520_AddedTableVendorOrderMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101151953476_AddedNewColumnInVendor.cs" />
+    <Compile Include="Migrations\202101151953476_AddedNewColumnInVendor.Designer.cs">
+      <DependentUpon>202101151953476_AddedNewColumnInVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102091951088_AddedThreeColumnsInOrder.cs" />
+    <Compile Include="Migrations\202102091951088_AddedThreeColumnsInOrder.Designer.cs">
+      <DependentUpon>202102091951088_AddedThreeColumnsInOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102102044503_added_CR_adv_column_in_Order.cs" />
+    <Compile Include="Migrations\202102102044503_added_CR_adv_column_in_Order.Designer.cs">
+      <DependentUpon>202102102044503_added_CR_adv_column_in_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102102136001_added_payment_status_column.cs" />
+    <Compile Include="Migrations\202102102136001_added_payment_status_column.Designer.cs">
+      <DependentUpon>202102102136001_added_payment_status_column.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103191123265_AddedColumnsInCustomerandCategory.cs" />
+    <Compile Include="Migrations\202103191123265_AddedColumnsInCustomerandCategory.Designer.cs">
+      <DependentUpon>202103191123265_AddedColumnsInCustomerandCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103250926387_AddedTables_Banners_BannerImages_CustomerLikes.cs" />
+    <Compile Include="Migrations\202103250926387_AddedTables_Banners_BannerImages_CustomerLikes.Designer.cs">
+      <DependentUpon>202103250926387_AddedTables_Banners_BannerImages_CustomerLikes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103271400383_AddedCloumnandTable_CustomerNotification.cs" />
+    <Compile Include="Migrations\202103271400383_AddedCloumnandTable_CustomerNotification.Designer.cs">
+      <DependentUpon>202103271400383_AddedCloumnandTable_CustomerNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103281045341_AddedTable_Icons.cs" />
+    <Compile Include="Migrations\202103281045341_AddedTable_Icons.Designer.cs">
+      <DependentUpon>202103281045341_AddedTable_Icons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103311237261_AddedTable_HomescreenLayout_Colors.cs" />
+    <Compile Include="Migrations\202103311237261_AddedTable_HomescreenLayout_Colors.Designer.cs">
+      <DependentUpon>202103311237261_AddedTable_HomescreenLayout_Colors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104021352561_addedColumn_BirhtDate_Image_InUserTable.cs" />
+    <Compile Include="Migrations\202104021352561_addedColumn_BirhtDate_Image_InUserTable.Designer.cs">
+      <DependentUpon>202104021352561_addedColumn_BirhtDate_Image_InUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104141002405_AddedTables_Classified.cs" />
+    <Compile Include="Migrations\202104141002405_AddedTables_Classified.Designer.cs">
+      <DependentUpon>202104141002405_AddedTables_Classified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105040850438_AddedColumnInClassifiedRating.cs" />
+    <Compile Include="Migrations\202105040850438_AddedColumnInClassifiedRating.Designer.cs">
+      <DependentUpon>202105040850438_AddedColumnInClassifiedRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105311101130_AddedCarouselTable.cs" />
+    <Compile Include="Migrations\202105311101130_AddedCarouselTable.Designer.cs">
+      <DependentUpon>202105311101130_AddedCarouselTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106061534050_RemovedCategoryColumn.cs" />
+    <Compile Include="Migrations\202106061534050_RemovedCategoryColumn.Designer.cs">
+      <DependentUpon>202106061534050_RemovedCategoryColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106070639484_AddedBestDealTable.cs" />
+    <Compile Include="Migrations\202106070639484_AddedBestDealTable.Designer.cs">
+      <DependentUpon>202106070639484_AddedBestDealTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106081504079_RemovedBannerImageColumn.cs" />
+    <Compile Include="Migrations\202106081504079_RemovedBannerImageColumn.Designer.cs">
+      <DependentUpon>202106081504079_RemovedBannerImageColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106091559236_AddedSpecialistInClassified.cs" />
+    <Compile Include="Migrations\202106091559236_AddedSpecialistInClassified.Designer.cs">
+      <DependentUpon>202106091559236_AddedSpecialistInClassified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106101452276_AddedLocationColumn.cs" />
+    <Compile Include="Migrations\202106101452276_AddedLocationColumn.Designer.cs">
+      <DependentUpon>202106101452276_AddedLocationColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106101737272_AddedArticle.cs" />
+    <Compile Include="Migrations\202106101737272_AddedArticle.Designer.cs">
+      <DependentUpon>202106101737272_AddedArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106111213311_AddedFKForCategory.cs" />
+    <Compile Include="Migrations\202106111213311_AddedFKForCategory.Designer.cs">
+      <DependentUpon>202106111213311_AddedFKForCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="bin\Debug\BankStatementAnalyzer.Repository.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\BankStatementAnalyzer.Models.dll" />
+    <Content Include="bin\Debug\BankStatementAnalyzer.Models.pdb" />
+    <Content Include="bin\Debug\BankStatementAnalyzer.Repository.dll" />
+    <Content Include="bin\Debug\BankStatementAnalyzer.Repository.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="SqlScript\log4Net.sql" />
+    <Content Include="SqlScript\Masters.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankStatementAnalyzer.Models\BankStatementAnalyzer.Models.csproj">
+      <Project>{5bb722e5-dbe1-4f28-af58-50653528896b}</Project>
+      <Name>BankStatementAnalyzer.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202009231822091_Initial.resx">
+      <DependentUpon>202009231822091_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010091504112_RemovedCompanyIdFromBaseModel.resx">
+      <DependentUpon>202010091504112_RemovedCompanyIdFromBaseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010211930098_AddedMasters.resx">
+      <DependentUpon>202010211930098_AddedMasters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010261922302_AddedColumnClothId.resx">
+      <DependentUpon>202010261922302_AddedColumnClothId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010272043588_Test.resx">
+      <DependentUpon>202010272043588_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010272046002_NewTest.resx">
+      <DependentUpon>202010272046002_NewTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010291956464_UpdatedTables.resx">
+      <DependentUpon>202010291956464_UpdatedTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010292048070_AddedRelationInCloth.resx">
+      <DependentUpon>202010292048070_AddedRelationInCloth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011021307227_AddedNewColumnInOrder.resx">
+      <DependentUpon>202011021307227_AddedNewColumnInOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011041649521_NewTableAddedForPackageMapping.resx">
+      <DependentUpon>202011041649521_NewTableAddedForPackageMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011041714073_AddedNewColumnInPackage.resx">
+      <DependentUpon>202011041714073_AddedNewColumnInPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011080801396_AddedVendorMaster.resx">
+      <DependentUpon>202011080801396_AddedVendorMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011142057268_AddedNewColumnAddress.resx">
+      <DependentUpon>202011142057268_AddedNewColumnAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011161107079_AddedCouponRelationWithOrder.resx">
+      <DependentUpon>202011161107079_AddedCouponRelationWithOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012012050394_AddedColumnEstimatedDate.resx">
+      <DependentUpon>202012012050394_AddedColumnEstimatedDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012031950085_AddedColumnRemarkInOrderDetails.resx">
+      <DependentUpon>202012031950085_AddedColumnRemarkInOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012072226519_AddedColumnKeyInOrderType.resx">
+      <DependentUpon>202012072226519_AddedColumnKeyInOrderType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012132101076_AddedColumnsInPackageTable.resx">
+      <DependentUpon>202012132101076_AddedColumnsInPackageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012132219520_AddedTableVendorOrderMapping.resx">
+      <DependentUpon>202012132219520_AddedTableVendorOrderMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101151953476_AddedNewColumnInVendor.resx">
+      <DependentUpon>202101151953476_AddedNewColumnInVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102091951088_AddedThreeColumnsInOrder.resx">
+      <DependentUpon>202102091951088_AddedThreeColumnsInOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102102044503_added_CR_adv_column_in_Order.resx">
+      <DependentUpon>202102102044503_added_CR_adv_column_in_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102102136001_added_payment_status_column.resx">
+      <DependentUpon>202102102136001_added_payment_status_column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103191123265_AddedColumnsInCustomerandCategory.resx">
+      <DependentUpon>202103191123265_AddedColumnsInCustomerandCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103250926387_AddedTables_Banners_BannerImages_CustomerLikes.resx">
+      <DependentUpon>202103250926387_AddedTables_Banners_BannerImages_CustomerLikes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103271400383_AddedCloumnandTable_CustomerNotification.resx">
+      <DependentUpon>202103271400383_AddedCloumnandTable_CustomerNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103281045341_AddedTable_Icons.resx">
+      <DependentUpon>202103281045341_AddedTable_Icons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103311237261_AddedTable_HomescreenLayout_Colors.resx">
+      <DependentUpon>202103311237261_AddedTable_HomescreenLayout_Colors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104021352561_addedColumn_BirhtDate_Image_InUserTable.resx">
+      <DependentUpon>202104021352561_addedColumn_BirhtDate_Image_InUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104141002405_AddedTables_Classified.resx">
+      <DependentUpon>202104141002405_AddedTables_Classified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105040850438_AddedColumnInClassifiedRating.resx">
+      <DependentUpon>202105040850438_AddedColumnInClassifiedRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105311101130_AddedCarouselTable.resx">
+      <DependentUpon>202105311101130_AddedCarouselTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106061534050_RemovedCategoryColumn.resx">
+      <DependentUpon>202106061534050_RemovedCategoryColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106070639484_AddedBestDealTable.resx">
+      <DependentUpon>202106070639484_AddedBestDealTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106081504079_RemovedBannerImageColumn.resx">
+      <DependentUpon>202106081504079_RemovedBannerImageColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106091559236_AddedSpecialistInClassified.resx">
+      <DependentUpon>202106091559236_AddedSpecialistInClassified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106101452276_AddedLocationColumn.resx">
+      <DependentUpon>202106101452276_AddedLocationColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106101737272_AddedArticle.resx">
+      <DependentUpon>202106101737272_AddedArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106111213311_AddedFKForCategory.resx">
+      <DependentUpon>202106111213311_AddedFKForCategory.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

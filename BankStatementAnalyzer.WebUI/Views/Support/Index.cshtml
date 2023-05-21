@@ -1,0 +1,51 @@
+﻿@model Tuple<string, string>
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/Annon_Layout.cshtml";
+}
+
+<h2>Contact Us</h2>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xl-3 col-md-6 col-12">
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border bg-secondary">
+                    <h5 class="box-title">Contact No</h5>
+                </div>
+                <div class="box-body">
+                    <div class="media">
+                        <span class="fa fa-phone lead text-info"></span>
+                        <div class="media-body">
+                            <p><strong>@Model.Item2</strong></p>
+                            <p>Mobile</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+        <div class="col-xl-3 col-md-6 col-12">
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border bg-secondary">
+                    <h5 class="box-title">Email</h5>
+                </div>
+                <div class="box-body">
+                    <div class="media">
+                        <span class="fa fa-envelope lead text-info"></span>
+                        <div class="media-body">
+                            <p><strong>@Model.Item1</strong></p>
+                            <p>Work</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</section>

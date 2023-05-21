@@ -1,0 +1,80 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.PushNotificationDevices
+@{
+    ViewBag.Title = "Send Notification";
+    ViewBag.BoxHeader = "Notification to User";
+    ViewBag.MainHeading = "Send Notification";
+}
+
+
+@using (Html.BeginForm("SendNotification", "PushNotification", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Enter Title", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @autocomplete = "Off" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Enter Message", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(model => model.Text, new { @class = "form-control", @autocomplete = "Off", @cols = "80" })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.RadioButtonFor(model => model.UserType, BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser, new { @id = BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser, @class = "with-gap" })
+                @Html.Label(BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser.ToString())
+
+                @Html.RadioButtonFor(model => model.UserType, BankStatementAnalyzer.WebUI.ViewModels.UserType.AllUser, new { @id = BankStatementAnalyzer.WebUI.ViewModels.UserType.AllUser, @class = "with-gap" })
+                @Html.Label(BankStatementAnalyzer.WebUI.ViewModels.UserType.AllUser.ToString())
+            </div>
+        </div>
+        <div class="form-group" style="display:none;" id="selectUser">
+            @Html.Label("Select Customer", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.ListBoxFor(model => model.DeviceIds, (IEnumerable<SelectListItem>)ViewBag.customers, new { @class = "form-control select2", @multiple = "multiple", @style = "width: 100%" })
+                @Html.ValidationMessageFor(model => model.DeviceIds, "Atleast one customer is requierd to send notification", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="clearfix">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(".select2").select2();
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            if ('@BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser' == '@Model.UserType')
+            {
+                $("#selectUser").show();
+            }
+            else
+            {
+                $("#selectUser").hide();
+            }
+        });
+    </script>
+
+    <script>
+        $("#SelectUser").click(function () {
+            $("#selectUser").show();
+        });
+    </script>
+
+    <script>
+        $("#AllUser").click(function () {
+            $("#selectUser").hide();
+        });
+    </script>
+}  

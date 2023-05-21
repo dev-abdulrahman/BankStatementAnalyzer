@@ -1,0 +1,126 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Orders";
+    ViewBag.BoxHeader = "Package List";
+}
+
+<table class="table table-responsive table-responsive-lg">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Order Id")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Package.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsUrgent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details","Orders",new { id = item.ID})"><span class="text-blue">@item.ID</span></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package.Name)
+            </td>
+            @if (item.IsUrgent)
+            {
+                <td>
+                    <span class="">Yes</span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <span class="">No</span>
+                </td>
+            }
+            @if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Ordered)
+            {
+                <td>
+                    <span class="">Ordered</span>
+                </td>
+            }
+            else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.AssignedForPickUp)
+            {
+                <td>
+                    <span class="">Assigned for pickup</span>
+                </td>
+            }
+            else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.PickedUp)
+            {
+                <td>
+                    <span class="">Picked-Up</span>
+                </td>
+            }
+            else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.UnderProcessing)
+            {
+                <td>
+                    <span class="">Under Processing</span>
+                </td>
+            }
+            else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.ReadyForDelivery)
+            {
+                <td>
+                    <span class="">Ready for Delivery</span>
+                </td>
+            }
+            else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.AssignedForDelivery)
+            {
+                <td>
+                    <span class="">Assigned for Delivery</span>
+                </td>
+            }
+            else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Delivered)
+            {
+                <td>
+                    <span class="">Completed</span>
+                </td>
+            }
+            else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Cancelled)
+            {
+                <td>
+                    <span class="">Cancelled</span>
+                </td>
+            }
+            else
+            {
+                <td>
+                    -
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                @{Html.RenderPartial("ActionDropDown", item);}
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({ "order": [[0, "desc"]] });
+    </script>
+}

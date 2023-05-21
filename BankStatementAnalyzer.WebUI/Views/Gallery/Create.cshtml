@@ -1,0 +1,61 @@
+﻿@model BankStatementAnalyzer.Models.Gallery
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.MainHeading = "Create";
+    ViewBag.BoxHeader = "Create Gallery";
+}
+
+@using (Html.BeginForm("Create", "Gallery", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageCategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.ImageCategoryId, (IEnumerable<SelectListItem>)ViewBag.ImageCatogies, "Select Image Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ImageCategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Upload", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="input-group col-md-6">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="file" required accept="image/*"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateAnother, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CreateAnother)
+                    @Html.ValidationMessageFor(model => model.CreateAnother, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

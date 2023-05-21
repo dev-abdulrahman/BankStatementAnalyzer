@@ -1,0 +1,80 @@
+﻿@model BankStatementAnalyzer.BusinessLogic.ViewModels.OrderVM
+
+<!-- info row -->
+<div class="row invoice-info">
+    <div class="col-12 col-lg-10 invoice-col mb-30">
+        <div class="mb-10 bb-1">
+            <h3><strong class="text-blue">@Model.Customer.Name</strong></h3>
+            <address>
+                Address:<b> @Model.Address.DeliveryAddress</b><br>
+                FLat:<b> @Model.Address.Flat</b><br>
+                Area:<b> @Model.Address.Area</b><br>
+                Landmark:<b> @Model.Address.LandMark</b><br>
+                Phone:<b> @Model.Customer.Mobile</b><br />
+                Email:<b> @Model.Customer.Email</b>
+            </address>
+            <h4>Updated on: <strong class="text-primary">@Model.PlacedOn.ToString("dd MMM yyyy")</strong></h4>
+            <h4>Order Type: <strong class="text-danger">@(Model.OrderType == "Package"?string.Format("Package - ({0})", Model.PackageName) : Model.OrderType)</strong></h4>
+            <h4>Payment mode: <strong class="text-danger">@Model.PaymentType</strong></h4>
+
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<!-- Table row -->
+<h3><strong class="text-blue">Order Summary</strong></h3>
+<div class="row">
+    <div class="col-12 table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>#</th>
+                    <th class="text-center">Cloth</th>
+                    <th class="text-center">Service</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">IsUrgent</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Total</th>
+                </tr>
+            </tbody>
+            <tbody>
+                @{int i = 1;
+                    foreach (var orderSummary in Model.OrderSummary)
+                    {
+                        <tr>
+                            <td class="text-center">@i</td>
+                            <td class="text-center">@orderSummary.Cloth</td>
+                            <td class="text-center">@orderSummary.Service</td>
+                            <td class="text-center">@orderSummary.Status</td>
+                            <td class="text-center">@(orderSummary.IsUrgent ? "Yes" : "No" )</td>
+                            <td class="text-center">@orderSummary.Quantity</td>
+                            <td class="text-center">@Model.Currency @orderSummary.Price</td>
+                            <td class="text-center">@Model.Currency @orderSummary.TotalPayable</td>
+                        </tr>
+                        i++;
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <!-- accepted payments column -->
+    <div class="col-12 col-sm-6">
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 text-right">
+        <div>
+            <p>Sub - Total amount  :  <b>  @Model.Currency @Model.OrderTotal.ToString("#.##")</b></p>
+            <p>Coupon  :  <b> - @Model.Currency @Model.Coupon.ToString("#.##")</b></p>
+        </div>
+        <div class="total-payment">
+            <h3><b>Total :</b>  @Model.Currency <span id="subtotal">@Model.PaidAmount.ToString("#.##")</span></h3>
+        </div>
+    </div>
+</div>

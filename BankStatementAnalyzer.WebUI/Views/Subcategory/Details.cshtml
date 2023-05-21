@@ -1,0 +1,45 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.CategorySubCategoryVM
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.MainHeading = "Subcategory Details";
+    ViewBag.BoxHeader = "Subcategory List";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SubCategoryMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCategory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubCategory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCategory.Key)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubCategory.Key)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SubCategory.ID }) |
+    @Html.ActionLink("Back to List", "Edit", "CategoryMaster", new { ID = Model.SubCategory.CategoryID }, null)
+</p>

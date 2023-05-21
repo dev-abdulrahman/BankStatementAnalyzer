@@ -1,0 +1,48 @@
+﻿@model BankStatementAnalyzer.Models.SystemSetting
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.MainHeading = "System Setting Details";
+    ViewBag.BoxHeader = "System Setting Details";
+}
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SettingTypeValue)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SettingTypeValue)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Value)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Value)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+    
+        </dl>
+    
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+

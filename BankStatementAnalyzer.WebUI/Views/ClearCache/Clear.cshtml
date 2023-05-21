@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Clear";
+}
+
+<div class="col-lg-8">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Create Company</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                <button type="submit" class="col-2 btn btn-block btn-danger btn-pill">Clear cache</button>
+            }
+            <br />
+            <br />
+            <div>
+                @Html.ActionLink("Back to home", "Index", "Home", null, new { @class = "col-2 btn btn-block btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.ClassifiedArticleVM
+@{
+    if (!Model.IsEditMode)
+    {
+        ViewBag.Title = "Add Article";
+        ViewBag.BoxHeader = "Add New Article";
+        ViewBag.MainHeading = "New Article";
+    }
+    else
+    {
+        ViewBag.Title = "Edit Article";
+        ViewBag.BoxHeader = "Edit Article";
+        ViewBag.MainHeading = "Article";
+    }
+}
+@using (Html.BeginForm("Create", "ClassifiedArticle", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.IsEditMode)
+                    @Html.LabelFor(model => model.Name)
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Select Category", htmlAttributes: new { @class = "control-label" })
+                    @Html.ListBoxFor(model => model.SelectedSubCategory, (IEnumerable<SelectListItem>)ViewBag.subCategories, new { @id = "selectedcategory", @class = "form-control select2", @multiple = "multiple", @style = "width: 100%" })
+                    @Html.ValidationMessageFor(model => model.SelectedSubCategory, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Heading)
+                    @Html.TextBoxFor(model => model.Heading, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Heading, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.ShortDescription)
+                    @Html.TextAreaFor(model => model.ShortDescription, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.SubHeading)
+                    @Html.TextBoxFor(model => model.SubHeading, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.SubHeading, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Address1)
+                    @Html.TextAreaFor(model => model.Address1, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Availability)
+                    @Html.EnumDropDownListFor(model => model.Availability, "Select Availability", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Availability, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.ContactNo)
+                    @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Keywords)
+                    @Html.TextAreaFor(model => model.Keywords, new { @class = "form-control", @autocomplete = "Off", @placeholder = "Comma seperated list of keywords" })
+                    @Html.ValidationMessageFor(model => model.Keywords, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Images)
+                    @Html.TextBoxFor(model => model.Images, "", new { @class = "form-control", @type = "file", @multiple = "multiple" })
+                    @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Article)
+                    @Html.TextAreaFor(model => model.Article, new { @class = "form-control textarea-editor", @autocomplete = "Off", @placeholder = "Type here" })
+                    @Html.ValidationMessageFor(model => model.Article, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <span>
+                    <a class="btn btn-default" href="@Url.Action("Index","ClassifiedArticle")">Cancel</a>
+                </span>
+                <span style="margin-left:10px">
+                    <input type="submit" value="Save" class="btn btn-primary btnSubmit" />
+                </span>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(".select2").select2();
+    </script>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js">
+    </script>
+    @Scripts.Render("~/bundles/Script-custom-editor")
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            // Initialize Editor
+            $('.textarea-editor').summernote({
+                height: 300, // set editor height
+                minHeight: null, // set minimum height of editor
+                maxHeight: null, // set maximum height of editor
+                focus: false, // set focus to editable area after initializing summernote
+                codemirror: {
+                    theme: 'monokai'
+                }                
+            });
+        });
+
+    </script>
+}  

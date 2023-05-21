@@ -1,0 +1,44 @@
+-----------------------------------------------------------------------------
+Date : 8/09/2019 18:17:24
+
+System.Data.Entity.Validation.DbEntityValidationException
+Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace :    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Ecommerce.Repository.Common.GenericRepository`2.Save() in E:\NewProject\Risible\Ecommerce.Repository\Common\GenericRepository.cs:line 59
+   at Ecommerce.BusinessLogic.Impl.ProductMasterService.Save() in E:\NewProject\Risible\Ecommerce.BusinessLogic\Impl\ProductMasterService.cs:line 84
+   at Ecommerce.WebUI.Controllers.ProductMasterController.Create(List`1 files, Product model) in E:\NewProject\Risible\Ecommerce.WebUI\Controllers\ProductMasterController.cs:line 102
+-----------------------------------------------------------------------------
+Date : 8/09/2019 18:18:01
+
+System.Data.Entity.Validation.DbEntityValidationException
+Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace :    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Ecommerce.Repository.Common.GenericRepository`2.Save() in E:\NewProject\Risible\Ecommerce.Repository\Common\GenericRepository.cs:line 59
+   at Ecommerce.BusinessLogic.Impl.ProductMasterService.Save() in E:\NewProject\Risible\Ecommerce.BusinessLogic\Impl\ProductMasterService.cs:line 84
+   at Ecommerce.WebUI.Controllers.ProductMasterController.Create(List`1 files, Product model) in E:\NewProject\Risible\Ecommerce.WebUI\Controllers\ProductMasterController.cs:line 102
+-----------------------------------------------------------------------------
+Date : 8/09/2019 18:24:25
+
+System.Data.Entity.Validation.DbEntityValidationException
+Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace :    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Ecommerce.Repository.Common.GenericRepository`2.Save() in E:\NewProject\Risible\Ecommerce.Repository\Common\GenericRepository.cs:line 59
+   at Ecommerce.BusinessLogic.Impl.ProductMasterService.Save() in E:\NewProject\Risible\Ecommerce.BusinessLogic\Impl\ProductMasterService.cs:line 84
+   at Ecommerce.WebUI.Controllers.ProductMasterController.Create(List`1 files, Product model) in E:\NewProject\Risible\Ecommerce.WebUI\Controllers\ProductMasterController.cs:line 102
+-----------------------------------------------------------------------------
+Date : 8/09/2019 18:27:50
+
+System.Data.Entity.Validation.DbEntityValidationException
+Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+StackTrace :    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Ecommerce.Repository.Common.GenericRepository`2.Save() in E:\NewProject\Risible\Ecommerce.Repository\Common\GenericRepository.cs:line 59
+   at Ecommerce.BusinessLogic.Impl.ProductMasterService.Save() in E:\NewProject\Risible\Ecommerce.BusinessLogic\Impl\ProductMasterService.cs:line 84
+   at Ecommerce.WebUI.Controllers.ProductMasterController.Create(List`1 files, Product model) in E:\NewProject\Risible\Ecommerce.WebUI\Controllers\ProductMasterController.cs:line 102

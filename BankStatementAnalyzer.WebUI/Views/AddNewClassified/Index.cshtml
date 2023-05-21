@@ -1,0 +1,138 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.ClassifiedIndexViewModel
+@{
+    if (!Model.IsEditMode)
+    {
+        ViewBag.Title = "Add Classified";
+        ViewBag.BoxHeader = "Add New Classified";
+        ViewBag.MainHeading = "Add New Classified";
+    }
+    else
+    {
+        ViewBag.Title = "Edit Classified";
+        ViewBag.BoxHeader = "Edit Classified";
+        ViewBag.MainHeading = "Edit Classified";
+    }
+}
+
+@using (Html.BeginForm("AddClassified", "AddNewClassified", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.IsEditMode)
+                    @Html.LabelFor(model => model.Name)
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Select Category", htmlAttributes: new { @class = "control-label" })
+                    @Html.ListBoxFor(model => model.SelectedCategory, (IEnumerable<SelectListItem>)ViewBag.categories, new { @id = "selectedcategory", @class = "form-control select2", @multiple = "multiple", @style = "width: 100%" })
+                    @Html.ValidationMessageFor(model => model.SelectedCategory, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Description)
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.SpecialistIn)
+                    @Html.TextAreaFor(model => model.SpecialistIn, new { @class = "form-control", @autocomplete = "Off",  @placeholder = "Comma seperated list of words" })
+                    @Html.ValidationMessageFor(model => model.SpecialistIn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Address1)
+                    @Html.TextAreaFor(model => model.Address1, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Location)
+                    @Html.TextAreaFor(model => model.Location, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Latitude)
+                    @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Longitude)
+                    @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control", @autocomplete = "Off" })
+                    @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.ContactNo)
+                    @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.OptionalContactNo)
+                    @Html.TextBoxFor(model => model.OptionalContactNo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OptionalContactNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Availability)
+                    @Html.EnumDropDownListFor(model => model.Availability, "Select Availability", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Availability, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Images)
+                    @Html.TextBoxFor(model => model.Images, "", new { @class = "form-control", @type = "file", @multiple = "multiple" })
+                    @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Keywords)
+                    @Html.TextAreaFor(model => model.Keywords, new { @class = "form-control", @autocomplete = "Off", @placeholder = "Comma seperated list of keywords" })
+                    @Html.ValidationMessageFor(model => model.Keywords, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <span>
+                    <a class="btn btn-default" href="@Url.Action("Index","ClassifiedList")">Cancel</a>
+                </span>
+                <span style="margin-left:10px">
+                    <input type="submit" value="Save" class="btn btn-primary btnSubmit" />
+                </span>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(".select2").select2();
+    </script>
+}  

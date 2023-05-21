@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2DB33DB8-1493-4A19-8C21-B68EDEA411C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BankStatementAnalyzer.BusinessLogic</RootNamespace>
+    <AssemblyName>BankStatementAnalyzer.BusinessLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.87.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.87.1\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper.Excel, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.Excel.1.0.6\lib\net40\CsvHelper.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CSVCustomHelper.cs" />
+    <Compile Include="Common\EmailHelper.cs" />
+    <Compile Include="Common\GeoLocation.cs" />
+    <Compile Include="Common\Helpers.cs" />
+    <Compile Include="Common\IGenericService.cs" />
+    <Compile Include="Common\MailModel.cs" />
+    <Compile Include="Common\SystemConstants.cs" />
+    <Compile Include="Common\TextReader.cs" />
+    <Compile Include="Impl\BannerImagesService.cs" />
+    <Compile Include="Impl\BannersService.cs" />
+    <Compile Include="Impl\BestDealService.cs" />
+    <Compile Include="Impl\CarouselService.cs" />
+    <Compile Include="Impl\ClassifiedArticleCategoryService.cs" />
+    <Compile Include="Impl\ClassifiedArticleImagesService.cs" />
+    <Compile Include="Impl\ClassifiedArticleKeywordsService.cs" />
+    <Compile Include="Impl\ClassifiedArticleService.cs" />
+    <Compile Include="Impl\ClassifiedCategoryService.cs" />
+    <Compile Include="Impl\ClassifiedContactsService.cs" />
+    <Compile Include="Impl\ClassifiedImagesService.cs" />
+    <Compile Include="Impl\ClassifiedKeywordsService.cs" />
+    <Compile Include="Impl\ClassifiedRatingService.cs" />
+    <Compile Include="Impl\ClassifiedService.cs" />
+    <Compile Include="Impl\ColorsService.cs" />
+    <Compile Include="Impl\CustomerLikesService.cs" />
+    <Compile Include="Impl\CustomerNotificationService.cs" />
+    <Compile Include="Impl\DashboardService.cs" />
+    <Compile Include="Impl\HomeScreenLayoutService.cs" />
+    <Compile Include="Impl\IconsService.cs" />
+    <Compile Include="Impl\OrderVendorMappingService.cs" />
+    <Compile Include="Impl\PackageCouponMappingService.cs" />
+    <Compile Include="Impl\RateCardService.cs" />
+    <Compile Include="Impl\SendEmailService.cs" />
+    <Compile Include="Impl\ServiceTypeService.cs" />
+    <Compile Include="Impl\ClothsService.cs" />
+    <Compile Include="Impl\PackageService.cs" />
+    <Compile Include="Impl\OrderTypeService.cs" />
+    <Compile Include="Impl\AppMessageService.cs" />
+    <Compile Include="Impl\CouponService.cs" />
+    <Compile Include="Impl\CustomerCreditHistoryService.cs" />
+    <Compile Include="Impl\CustomerCreditMappingService.cs" />
+    <Compile Include="Impl\CustomerRefferalCodeMappingService.cs" />
+    <Compile Include="Impl\DeliveryBoyService.cs" />
+    <Compile Include="Impl\DistanceService.cs" />
+    <Compile Include="Impl\ManageOrderService.cs" />
+    <Compile Include="Impl\ManageWalletService.cs" />
+    <Compile Include="Impl\OrderStatusMappingService.cs" />
+    <Compile Include="Impl\ReturnRequestDeliveryBoyMappingService.cs" />
+    <Compile Include="Impl\OrderDelvieryBoyMappingService.cs" />
+    <Compile Include="Impl\PaymentService.cs" />
+    <Compile Include="Impl\AddressService.cs" />
+    <Compile Include="Impl\AreaManagerService.cs" />
+    <Compile Include="Impl\CategoryService.cs" />
+    <Compile Include="Impl\CityService.cs" />
+    <Compile Include="Impl\CompanyService.cs" />
+    <Compile Include="Impl\ComplaintService.cs" />
+    <Compile Include="Impl\CustomerService.cs" />
+    <Compile Include="Impl\EmailService.cs" />
+    <Compile Include="Impl\GalleryService.cs" />
+    <Compile Include="Impl\ImageCategoryService.cs" />
+    <Compile Include="Impl\MemoryCacheService.cs" />
+    <Compile Include="Impl\MenuService.cs" />
+    <Compile Include="Impl\ActionService.cs" />
+    <Compile Include="Impl\AppConfigurationService.cs" />
+    <Compile Include="Impl\OrderDeatilService.cs" />
+    <Compile Include="Impl\OrderService.cs" />
+    <Compile Include="Impl\PageManagerService.cs" />
+    <Compile Include="Impl\ProductService.cs" />
+    <Compile Include="Impl\PushNotificationService.cs" />
+    <Compile Include="Impl\ReturnRequestService.cs" />
+    <Compile Include="Impl\SearchService.cs" />
+    <Compile Include="Impl\FileMasterService.cs" />
+    <Compile Include="Impl\PermissionMasterService.cs" />
+    <Compile Include="Impl\RoleMasterService.cs" />
+    <Compile Include="Impl\StoreService.cs" />
+    <Compile Include="Impl\StreetService.cs" />
+    <Compile Include="Impl\StyleTraitValueProductService.cs" />
+    <Compile Include="Impl\StyleTraitValueService.cs" />
+    <Compile Include="Impl\StyleTraitService.cs" />
+    <Compile Include="Impl\StyleClassService.cs" />
+    <Compile Include="Impl\SubCategoryService.cs" />
+    <Compile Include="Impl\SupportAndFAQService.cs" />
+    <Compile Include="Impl\SystemSettingService.cs" />
+    <Compile Include="Impl\TimeSlotService.cs" />
+    <Compile Include="Impl\UndeliveryReasonService.cs" />
+    <Compile Include="Impl\UnitOfMeasureService.cs" />
+    <Compile Include="Impl\UserCompanyMappingService.cs" />
+    <Compile Include="Impl\UserMasterService.cs" />
+    <Compile Include="Impl\VendorService.cs" />
+    <Compile Include="Impl\WalletService.cs" />
+    <Compile Include="Impl\CartManageService.cs" />
+    <Compile Include="Interface\IBestDealService.cs" />
+    <Compile Include="Interface\ICarouselService.cs" />
+    <Compile Include="Interface\IClassifiedArticleCategoryService.cs" />
+    <Compile Include="Interface\IClassifiedArticleImagesService.cs" />
+    <Compile Include="Interface\IClassifiedArticleKeywordsService.cs" />
+    <Compile Include="Interface\IClassifiedArticleService.cs" />
+    <Compile Include="Interface\IClassifiedCategoryService.cs" />
+    <Compile Include="Interface\IClassifiedContactsService.cs" />
+    <Compile Include="Interface\IClassifiedImagesService.cs" />
+    <Compile Include="Interface\IBannerImagesService.cs" />
+    <Compile Include="Interface\IBannersService.cs" />
+    <Compile Include="Interface\IClassifiedKeywordsService.cs" />
+    <Compile Include="Interface\IClassifiedRatingService.cs" />
+    <Compile Include="Interface\IClassifiedService.cs" />
+    <Compile Include="Interface\IColorsService.cs" />
+    <Compile Include="Interface\ICustomerLikesService.cs" />
+    <Compile Include="Interface\ICustomerNotificationService.cs" />
+    <Compile Include="Interface\IDashboardService.cs" />
+    <Compile Include="Interface\IHomeScreenLayoutService.cs" />
+    <Compile Include="Interface\IIconsService.cs" />
+    <Compile Include="Interface\IOrderVendorMappingService.cs" />
+    <Compile Include="Interface\IPackageCouponMappingService.cs" />
+    <Compile Include="Interface\IRateCardService.cs" />
+    <Compile Include="Interface\ISendEmailService.cs" />
+    <Compile Include="Interface\IServiceTypeService.cs" />
+    <Compile Include="Interface\IClothsService.cs" />
+    <Compile Include="Interface\IPackageService.cs" />
+    <Compile Include="Interface\IOrderTypeService.cs" />
+    <Compile Include="Interface\IAppMessageService.cs" />
+    <Compile Include="Interface\ICartManageService.cs" />
+    <Compile Include="Interface\ICustomerCreditHistoryService.cs" />
+    <Compile Include="Interface\ICustomerCreditMappingService.cs" />
+    <Compile Include="Interface\IDeliveryBoyService.cs" />
+    <Compile Include="Interface\ICouponService.cs" />
+    <Compile Include="Interface\IDistanceService.cs" />
+    <Compile Include="Interface\ICustomerRefferalCodeMappingService.cs" />
+    <Compile Include="Interface\IManageOrderService.cs" />
+    <Compile Include="Interface\IManageWalletService.cs" />
+    <Compile Include="Interface\IOrderStatusMappingService.cs" />
+    <Compile Include="Interface\IReturnRequestDeliveryBoyMappingService.cs" />
+    <Compile Include="Interface\IOrderDelvieryBoyMappingService.cs" />
+    <Compile Include="Interface\IPaymentService.cs" />
+    <Compile Include="Interface\IAddressService.cs" />
+    <Compile Include="Interface\IAreaManagerService.cs" />
+    <Compile Include="Interface\ICategoryService.cs" />
+    <Compile Include="Interface\ICityService.cs" />
+    <Compile Include="Interface\ICompanyService.cs" />
+    <Compile Include="Interface\IComplaintService.cs" />
+    <Compile Include="Interface\ICustomerService.cs" />
+    <Compile Include="Interface\IEmailService.cs" />
+    <Compile Include="Interface\IGalleryService.cs" />
+    <Compile Include="Interface\IImageCategoryService.cs" />
+    <Compile Include="Interface\IOrderDetailService.cs" />
+    <Compile Include="Interface\IOrderService.cs" />
+    <Compile Include="Interface\IProductService.cs" />
+    <Compile Include="Interface\IPushNotificationService.cs" />
+    <Compile Include="Interface\IReturnRequestService.cs" />
+    <Compile Include="Interface\IStoreService.cs" />
+    <Compile Include="Interface\IStyleTraitValueProductService.cs" />
+    <Compile Include="Interface\IStyleTraitValueService.cs" />
+    <Compile Include="Interface\IStyleTraitService.cs" />
+    <Compile Include="Interface\IStyleClassService.cs" />
+    <Compile Include="Interface\ISubCategoryService.cs" />
+    <Compile Include="Interface\IPageManagerService.cs" />
+    <Compile Include="Interface\IStreetService.cs" />
+    <Compile Include="Interface\ISupportAndFAQService.cs" />
+    <Compile Include="Interface\IMemoryCacheService.cs" />
+    <Compile Include="Interface\IMenuService.cs" />
+    <Compile Include="Interface\IActionService.cs" />
+    <Compile Include="Interface\IAppConfigurationService.cs" />
+    <Compile Include="Interface\ISearchService.cs" />
+    <Compile Include="Interface\IFileMasterService.cs" />
+    <Compile Include="Interface\IPermissionMasterService.cs" />
+    <Compile Include="Interface\IRoleMasterService.cs" />
+    <Compile Include="Interface\ISystemSettingService.cs" />
+    <Compile Include="Interface\ITimeSlotService.cs" />
+    <Compile Include="Interface\IUnitOfMeasureService.cs" />
+    <Compile Include="Interface\IUserCompanyMappingService.cs" />
+    <Compile Include="Interface\IUserMasterService.cs" />
+    <Compile Include="Interface\IUndeliveryReasonService.cs" />
+    <Compile Include="Interface\IVendorService.cs" />
+    <Compile Include="Interface\IWalletService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\Dashboard.cs" />
+    <Compile Include="ViewModels\GSTPriceViewModel.cs" />
+    <Compile Include="ViewModels\MemoryCacheKeys.cs" />
+    <Compile Include="ViewModels\OrderResponse.cs" />
+    <Compile Include="ViewModels\OrderVM.cs" />
+    <Compile Include="ViewModels\ReturnCanVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankStatementAnalyzer.Models\BankStatementAnalyzer.Models.csproj">
+      <Project>{5bb722e5-dbe1-4f28-af58-50653528896b}</Project>
+      <Name>BankStatementAnalyzer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankStatementAnalyzer.Repository\BankStatementAnalyzer.Repository.csproj">
+      <Project>{da094625-19e9-4b1a-983b-084a3d09c204}</Project>
+      <Name>BankStatementAnalyzer.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

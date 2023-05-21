@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.ReturnRequest>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Assigned";
+    ViewBag.BoxHeader = "Assigned List";
+}
+
+<table class="table table-responsive-lg">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfCans)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnRequestType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("ReturnCanDetails","Delivery",new { id = item.ID})"><span class="text-blue">@item.NoOfCans</span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnRequestType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate.Value)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("MarkedAsPickUp","Delivery",new { id = item.ID})">Mark as Completed</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({ "order": [[0, "desc"]] });
+
+        $(document).ready(function () {
+            $('.hidebtn').hide()
+        });
+    </script>
+}

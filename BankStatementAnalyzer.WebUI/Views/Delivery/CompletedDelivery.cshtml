@@ -1,0 +1,96 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Completed Orders";
+    ViewBag.BoxHeader = "Completed Order List";
+}
+
+<table class="table table-responsive-lg">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Order Id")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details","Orders",new { id = item.ID})"><span class="text-blue">@item.ID</span></a>
+                </td>
+                @if (item.OrderType == BankStatementAnalyzer.Models.OrderType.Insta)
+                {
+                    <td>
+                        <span class="">Insta Service</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="">Scheduled Service</span>
+                    </td>
+                }
+                @if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Ordered)
+                {
+                    <td>
+                        <span class="">Ordered</span>
+                    </td>
+                }
+                else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Assigned)
+                {
+                    <td>
+                        <span class="">Assigned for delivery</span>
+                    </td>
+                }
+                else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Completed)
+                {
+                    <td>
+                        <span class="btn btn-success btn-round btn-sm">Delivered</span>
+                    </td>
+                }
+                else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Cancelled)
+                {
+                    <td>
+                        <span class="">Cancelled</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        -
+                        @*<span class="btn btn-danger btn-round btn-sm">-</span>*@
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate.Value)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({ "order": [[0, "desc"]] });
+
+        $(document).ready(function () {
+            $('.hidebtn').hide()
+        });
+    </script>
+}

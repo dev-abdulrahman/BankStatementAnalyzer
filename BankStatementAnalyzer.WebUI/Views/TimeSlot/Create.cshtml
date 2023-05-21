@@ -1,0 +1,82 @@
+﻿@model BankStatementAnalyzer.Models.TimeSlot
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.MainHeading = "Available - Time";
+    ViewBag.BoxHeader = "Create Available - Time";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="input-group col-lg-6" id="calenderIcon">
+                @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control datepicker", @autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="input-group col-lg-6" id="calenderIcon2">
+                @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control datepicker2", @autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.Status, new { @class = "filled-in chk-col-green" })
+                    @Html.LabelFor(m => m.Status)
+                </div>
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateAnother, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CreateAnother)
+                    @Html.ValidationMessageFor(model => model.CreateAnother, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                @Html.Partial("FooterButtonsPV")
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <link href="~/Content/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-timepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $('#calenderIcon').click(function () {
+            $(function () {
+                $('.datepicker').timepicker();
+            });
+        });
+
+        $('#calenderIcon2').click(function () {
+            $(function () {
+                $(".datepicker2").timepicker();
+            })
+        });
+    </script>
+}

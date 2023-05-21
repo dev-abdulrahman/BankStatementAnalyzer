@@ -1,0 +1,10 @@
+﻿@using BankStatementAnalyzer.WebUI.Helpers
+@model BankStatementAnalyzer.WebUI.ViewModels.Roles.PermissionVM
+@using (Html.BeginCollectionItem("Permissions"))
+{
+    @Html.HiddenFor(m => m.PermissionInfo.ID)
+    <label class="custom-control custom-checkbox">
+        @Html.CheckBoxFor(m => m.IsSelected, new { @class = "custom-control-input", id = Model.PermissionInfo.ID })
+        <span class="custom-control-label">@Model.PermissionInfo.Name</span>
+    </label>
+}

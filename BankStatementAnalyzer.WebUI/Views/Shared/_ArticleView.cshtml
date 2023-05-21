@@ -1,0 +1,13 @@
+﻿@model  BankStatementAnalyzer.Models.ClassifiedArticle
+
+@{
+    ViewBag.Title = "Article";
+    Layout = "~/Views/Shared/Annon_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="info-box">
+        @Html.Raw(Model.Article)
+    </div>
+</div>
+

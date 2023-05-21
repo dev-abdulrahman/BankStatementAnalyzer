@@ -1,0 +1,10 @@
+﻿@using BankStatementAnalyzer.SuperAdmin.Helpers
+@model BankStatementAnalyzer.SuperAdmin.ViewModels.Permission.ActionVM
+@using (Html.BeginCollectionItem("Actions"))
+{
+    @Html.HiddenFor(m => m.ActionInfo.ID)
+    <label class="custom-control custom-checkbox">
+        @Html.CheckBoxFor(m => m.IsSelected, new { @class = "custom-control-input", id = Model.ActionInfo.ID })
+        <span class="custom-control-label">@Model.ActionInfo.Name</span>
+    </label>
+}

@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <title>@ViewBag.Title - Delivery Management</title>
+    <link rel="stylesheet" href="~/Content/theme/css/font-awesome.min.css" />
+    <link href="~/Content/theme/css/fonts.googleapis.min.css" rel="stylesheet" />
+    <link href="~/Content/theme/plugins/maps-google/plugin.css" rel="stylesheet" />
+    <link href="~/Content/theme/css/dashboard.css" rel="stylesheet" />
+    <script src="~/Content/theme/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/theme/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/theme/js/vendors/selectize.min.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery.tablesorter.min.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery-jvectormap-de-merc.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery-jvectormap-world-mill.js"></script>
+    <link href="~/Content/theme/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <script src="~/Content/theme/plugins/charts-c3/js/c3.min.js"></script>
+    <script src="~/Content/theme/plugins/charts-c3/js/d3.v3.min.js"></script>
+    <script src="~/Content/theme/plugins/input-mask/js/jquery.mask.min.js"></script>
+    <script src="~/Content/theme/plugins/datatables/datatables.min.js"></script>
+</head>
+<body>
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

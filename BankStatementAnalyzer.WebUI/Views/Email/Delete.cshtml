@@ -1,0 +1,33 @@
+﻿@model BankStatementAnalyzer.Models.Email
+
+    @{
+        ViewBag.Title = "Delete";
+        ViewBag.MainHeading = "Email";
+        ViewBag.BoxHeader = "Delete Email";
+    }
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailFor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmailFor)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailSubject)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmailSubject)
+            </dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+    </div>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Assigned Orders";
+    ViewBag.BoxHeader = "Assigned Order List";
+}
+
+<table class="table table-responsive-lg">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Order Id")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details","Delivery",new { id = item.ID})"><span class="text-blue">@item.ID</span></a>
+                </td>
+                @if (item.OrderType == BankStatementAnalyzer.Models.OrderType.Insta)
+                {
+                    <td>
+                        <span class="">Insta Service</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="">Scheduled Service</span>
+                    </td>
+                }
+                @if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Assigned)
+                {
+                    <td>
+                        <span class="">Assigned for delivery</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        -
+                        @*<span class="btn btn-danger btn-round btn-sm">-</span>*@
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate.Value)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Details","Delivery",new { id = item.ID})">Details</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("MarkAsDelivered","Delivery",new { id = item.ID})">Mark as Completed</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({ "order": [[0, "desc"]] });
+    </script>
+}

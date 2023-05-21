@@ -1,0 +1,108 @@
+﻿@model BankStatementAnalyzer.Models.Coupon
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.MainHeading = "Edit";
+    ViewBag.BoxHeader = "Edit Coupon";
+}
+
+<style>
+    .font-size-11 {
+        font-size: 11px;
+    }
+
+    .Text-danger {
+        color: red;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @*<ul class="nav nav-pills margin-bottom margin-top-10">
+            <li class=" nav-item"> <a href="#coupon" class="nav-link active" data-toggle="tab" aria-expanded="false">Coupon</a> </li>
+        </ul>*@
+    <div class="tab-content">
+        <div id="coupon" class="tab-pane active">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label>Name</label>
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @autocomplete = "Off" })
+                        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "Text-danger" })
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Type</label>
+                                @Html.DropDownListFor(model => model.DiscountType, EnumHelper.GetSelectList(typeof(BankStatementAnalyzer.Models.DiscountType)), "Select Restriction", new { @class = "form-control", @autocomplete = "Off" })
+                                @Html.ValidationMessageFor(x => x.DiscountType, "", new { @class = "Text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Discount</label>
+                                @Html.TextBoxFor(x => x.Discount, new { @class = "form-control", @autocomplete = "Off" })
+                                @Html.ValidationMessageFor(x => x.Discount, "", new { @class = "Text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label>Redemptions</label>
+                            @Html.TextBoxFor(x => x.Redemption, new { @class = "form-control", @autocomplete = "Off" })
+                            @Html.ValidationMessageFor(x => x.Redemption, "", new { @class = "Text-danger" })
+                            <p class="font-size-11">The total number of times this coupon can be redeemed. Set to 0 to allow any number of redemptions.</p>
+                        </div>*@
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label>Code</label>
+                        @Html.TextBoxFor(x => x.Code, new { @class = "form-control", @autocomplete = "Off" })
+                        @Html.ValidationMessageFor(x => x.Code, "", new { @class = "Text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Package</label>
+                        @Html.DropDownListFor(model => model.PackageId, (IEnumerable<SelectListItem>)ViewBag.Package, "Select Package", new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(x => x.PackageId, "", new { @class = "Text-danger" })
+                    </div>
+                    @*<div class="form-group">
+                            <label>Minimum Total</label>
+                            @Html.TextBoxFor(x => x.MinTotal, new { @class = "form-control", @autocomplete = "Off" })
+                            @Html.ValidationMessageFor(x => x.MinTotal, "", new { @class = "Text-danger" })
+                        </div>*@
+                    @*<div class="form-group">
+                            <label>Customer Redemptions</label>
+                            @Html.TextBoxFor(x => x.CustomerRedemption, new { @class = "form-control", @autocomplete = "Off" })
+                            @Html.ValidationMessageFor(x => x.CustomerRedemption, "", new { @class = "Text-danger" })
+                            <p class="font-size-11">The number of times a specific customer can redeem this coupon. Set to 0 to allow any number of redemptions.</p>
+                        </div>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-12">
+                    <div class="form-group">
+                        <label>Description</label>
+                        @Html.TextBoxFor(x => x.Description, new { @class = "form-control", @autocomplete = "Off" })
+                        @Html.ValidationMessageFor(x => x.Description, "", new { @class = "Text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" })
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.Status, new { @class = "filled-in chk-col-green" })
+                            @Html.LabelFor(m => m.Status)
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                @Html.Partial("FooterButtonsPV")
+            </div>
+        </div>
+    </div>
+}

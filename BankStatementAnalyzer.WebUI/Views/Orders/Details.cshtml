@@ -1,0 +1,8 @@
+﻿@model BankStatementAnalyzer.BusinessLogic.ViewModels.OrderVM
+@{
+    ViewBag.Title = "Details";
+    ViewBag.MainHeading = "Order Details";
+    ViewBag.BoxHeader = "Details";
+}
+
+@{ Html.RenderPartial("OrderDetailPartial", Model);}

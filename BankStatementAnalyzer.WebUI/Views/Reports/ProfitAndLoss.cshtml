@@ -1,0 +1,40 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.ReportVM.ProfitAndLossReportFilterModel
+
+@{
+    ViewBag.Title = "Profit and Loss Report";
+    ViewBag.MainHeading = "Profit and Loss Report";
+    ViewBag.BoxHeader = "Profit and Loss Report";
+}
+
+
+@using (Html.BeginForm())
+{
+    @*<ul class="nav nav-pills margin-bottom margin-top-10">
+            <li class=" nav-item"> <a href="#coupon" class="nav-link active" data-toggle="tab" aria-expanded="false">Coupon</a> </li>
+        </ul>*@
+    <div class="tab-content">
+        <div id="reportFilterSelector" class="tab-pane active">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control", @autocomplete = "Off", @type = "date" })
+                        @Html.ValidationMessageFor(x => x.StartDate, "", new { @class = "Text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        @Html.TextBoxFor(x => x.EndDate, new { @class = "form-control", @autocomplete = "Off", @type = "date" })
+                        @Html.ValidationMessageFor(x => x.EndDate, "", new { @class = "Text-danger" })
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                @Html.Partial("FooterButtonsPV")
+            </div>
+        </div>
+    </div>
+}

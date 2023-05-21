@@ -1,0 +1,71 @@
+﻿@model BankStatementAnalyzer.BusinessLogic.ViewModels.ReturnCanVM
+@{
+    ViewBag.Title = "Details";
+    ViewBag.MainHeading = "Order Details";
+    ViewBag.BoxHeader = "Details";
+}
+
+<!-- info row -->
+<div class="row invoice-info">
+    a
+    <div class="col-12 col-lg-10 invoice-col mb-30">
+        <div class="mb-10 bb-1">
+            <h3><strong class="text-blue">@Model.Customer.Name</strong></h3>
+            <address>
+                <strong>Address:</strong> @Model.Address.DeliveryAddress<br>
+                <strong>FLat:</strong> @Model.Address.Flat<br>
+                <strong>Area:</strong> @Model.Address.Area<br>
+                <strong>Landmark:</strong> @Model.Address.LandMark<br>
+                <strong>Phone:</strong> @Model.Customer.Mobile<br /><strong>Email:</strong> @Model.Customer.Email
+            </address>
+            <h4><strong class="text-primary">Created on: @Model.CreatedOn.ToString("dd MMM yyyy")</strong></h4>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+@if (Model.OrderStatus == "Assigned")
+{
+    <div class="row">
+        <div class="col-12 col-lg-10">
+            <div class="mb-10">
+                <h5><strong class="text-black">Delviery Boy Name: @Model.DeliveryBoy.Name</strong></h5>
+                <h5><strong class="text-black">Delviery Boy Number: @Model.DeliveryBoy.Number</strong></h5>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Table row -->
+<h3><strong class="text-blue">Return CAN Summary</strong></h3>
+<div class="row">
+    <div class="col-12 table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>#</th>
+                    <th class="text-right">No of CANS</th>
+                    <th class="text-right">Request Type</th>
+                    <th class="text-right">Remark</th>
+                </tr>
+            </tbody>
+            <tbody>
+                @{int i = 1;
+                    foreach (var orderSummary in Model.ReturnCanSummary)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@orderSummary.NoOfCans</td>
+                            <td class="text-right">@orderSummary.ReturnRequestType</td>
+                            <td class="text-right">₹@orderSummary.Remark</td>
+                        </tr>
+                        i++;
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

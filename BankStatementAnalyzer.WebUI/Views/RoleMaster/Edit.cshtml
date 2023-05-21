@@ -1,0 +1,59 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.Roles.RoleVM
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="col-lg-10">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Edit Role</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "RoleMaster", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.RoleInfo.DefaultAction)
+                @Html.HiddenFor(x => x.RoleInfo.DefaultController)
+                <div class="form-horizontal">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.RoleInfo.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.RoleInfo.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RoleInfo.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Permissions</label>
+                            <div class="col-lg-9">
+                                @{
+                                    string feature = "";
+                                    foreach (var item in Model.Permissions)
+                                    {
+                                        if (item.PermissionInfo.Feature != feature)
+                                        {
+                                            <div class="mb-2">
+                                                <b>@item.PermissionInfo.Feature</b>
+                                            </div>
+                                            feature = @item.PermissionInfo.Feature;
+                                        }
+                                        Html.RenderPartial("PermissionEditorRow", item);
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            }
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.AccountViewModel.CompanyViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="row align-items-center justify-content-md-center h-p100">
+    <div class="col-lg-8 col-md-11 col-12">
+        @if (!Html.ViewData.ModelState.IsValid)
+        {
+            <div class="row">
+                <div class="col-12 no-padding">
+                    <div class="alert alert-danger alert-dismissible">
+                        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row align-items-center justify-content-md-center h-p100" data-overlay-light="9">
+            <div class="col-lg-5 col-md-6 col-12">
+                <div class="p-40 text-center content-bottom">
+                    <img src="../../../images/logo/RN_logo.jpg" class="rounded-circle b-2 p-10 border-dark" alt="">
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6 col-12">
+                <div class="p-20 content-bottom">
+                    <div class="content-top-agile">
+                        <h2>Get started with Us</h2>
+                        <p class="text-fade">Select company to start your session</p>
+                    </div>
+                    @using (Html.BeginForm("Company", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Id, (IEnumerable<SelectListItem>)ViewBag.Companies, "Select company", new { @class = "form-control" })
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-yellow btn-block margin-top-10">Submit</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

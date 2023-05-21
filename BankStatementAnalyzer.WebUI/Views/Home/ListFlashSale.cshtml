@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.FlashSale>
+
+@{
+    ViewBag.Title = "ListFlashSale";
+}
+
+<p>
+    @Html.ActionLink("Create New", "CreateFlashSale", "Home", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Heading)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleEndTime)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Heading)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleEndTime)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("DetailFlashSale","Home",new { id = item.Id})">Detail</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="@Url.Action("EditFlashSale","Home",new { id = item.Id})">Edit</a>
+                    <a class="dropdown-item" href="@Url.Action("DeleteFlashSale","Home",new { id = item.Id})">Delete</a>
+                </div>
+
+            </td>
+        </tr>
+    }
+
+</table>

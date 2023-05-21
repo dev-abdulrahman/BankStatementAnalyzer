@@ -1,0 +1,174 @@
+﻿@using System.Web;
+@using BankStatementAnalyzer.Models;
+@{
+    ViewBag.AskMeLogoPath = "/images/logo/BSA.jpg";
+    ViewBag.AskMeAltText = "Bank Statement";
+}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from lion-admin-templates.multipurposethemes.com/lion-admin/main/pages/layout/collapsed-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Jul 2018 18:55:26 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/favicon.ico">
+    <title>@ViewBag.Title - Bank Statement</title>
+
+
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/content/Select2")
+    @Styles.Render("~/content/ImageUplodify")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/ImageUplodify")
+    @Scripts.Render("~/bundles/Select2")
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
+<body class="hold-transition skin-blue-light sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        @Html.Partial("UserAccountPV")
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar -->
+            @{var sideNameBold = string.IsNullOrEmpty((string)ViewBag.SideNameBold) ? "(BLANK)" : (string)ViewBag.SideNameBold; }
+            @{var sideNameRegular = string.IsNullOrEmpty((string)ViewBag.SideNameRegular) ? "(BLANK)" : (string)ViewBag.SideNameRegular; }
+
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="ulogo">
+                        <a href="@Url.Action("Index","Home")" style="background-image:url('\..\..\Images\logo\BSA.jpg');">
+                            <!-- logo for regular state and mobile devices -->
+                            <!--<span><b>@sideNameBold</b>@sideNameRegular</span>-->
+                            <img src="@ViewBag.AskMeLogoPath" alt="@ViewBag.AskMeAltText" width="150px">
+                            @*<span><b class="font-size-14">@sideNameBold</b></span>*@
+                        </a>
+                    </div>
+                    <!--<div class="image">
+        <img src="~/images/logo/RN_logo.jpg" class="rounded-circle" alt="User Image">
+    </div>-->
+                    @Html.Partial("ProfilePV")
+                </div>
+    <!-- sidebar menu -->
+                    @try
+                    {
+                        { Html.RenderAction("Menu", "Home"); }
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+</section>
+        </aside>
+        <!-- =============================================== -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    @{var heading = (string)ViewBag.MainHeading;}
+                    @(string.IsNullOrEmpty(heading) ? "(BLANK)" : heading)
+                </h1>
+                @*@Html.Partial("BreadcrumbPV")*@
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                @*@Html.Partial("TipsPV")*@
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@ViewBag.BoxHeader</h3>
+                        <div class="box-tools pull-right">
+                            @if (BankStatementAnalyzer.WebUI.Helpers.RequestHelper.Action() != "Index" && BankStatementAnalyzer.WebUI.Helpers.RequestHelper.Action() != "Error")
+                            {
+                                <button type="button" class="btn btn-box-tool">
+                                    @Html.ActionLink("Back to List", "Index", BankStatementAnalyzer.WebUI.Helpers.RequestHelper.Controller(), null, new { @class = "btn btn-block btn-info btn-xs btn-round btn-outline hidebtn" })
+                                </button>
+                            }
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        @RenderBody()
+                    </div>
+                    <!-- /.box-body -->
+                    @{var isIndex = ViewBag.IsIndex != null ? Convert.ToBoolean(ViewBag.IsIndex) : false; }
+                    @if (!isIndex)
+                    {
+                        <div class="box-footer">
+                            @* @Html.Partial("FooterButtonsPV")*@
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right d-none d-sm-inline-block">
+                <b>Version</b> 1.1
+            </div>
+            Copyright &copy; @DateTime.Now.Year <a href="https://test.e-laundry.in/">Bank Statement</a>. All Rights Reserved.
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            @if (TempData["success-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'Success',
+                    text: '@TempData["success-message"]',
+                    position: 'top-right',
+                    icon: 'success',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+
+            @if (TempData["error-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'Error',
+                    text: '@TempData["error-message"]',
+                    position: 'top-right',
+                    icon: 'error',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+            @if (TempData["warning-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'warning',
+                    text: '@TempData["warning-message"]',
+                    position: 'top-right',
+                    icon: 'warning',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+<!-- Mirrored from lion-admin-templates.multipurposethemes.com/lion-admin/main/pages/layout/collapsed-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Jul 2018 18:55:37 GMT -->
+</html>

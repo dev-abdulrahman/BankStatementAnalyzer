@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.PushNotification>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Push Notification";
+    ViewBag.BoxHeader = "Push Notification List";
+}
+
+<p>
+    @Html.ActionLink("Send Notification", "SendNotification", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                @if (item.Status)
+                {
+                    <td>
+                        <span class="btn btn-success btn-round btn-sm">Sent</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="btn btn-danger btn-round btn-sm">Failed</span>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({"order": [[0, "desc"]]});
+    </script>
+}

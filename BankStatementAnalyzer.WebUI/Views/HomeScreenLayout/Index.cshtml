@@ -1,0 +1,30 @@
+﻿@model List<BankStatementAnalyzer.WebUI.ViewModels.CategoryIconViewModel>
+
+@{
+    ViewBag.Title = "Homescreen Layout";
+    ViewBag.MainHeading = "Homescreen Layout";
+    ViewBag.BoxHeader = "Homescreen Layout";
+}
+
+<div class="content">
+    @for (int i = 1; i <= ViewBag.Rows; i++)
+    {
+        <div class="row">
+            <span>@{var records = Model.Where(x => x.Row == i).ToList();}</span>
+            @for (int j = 0; j < records.Count(); j++)
+            {
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <a href="#"><span class="info-box-text">@records[j].Name</span></a>
+                        <div>
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="@Url.Action("Edit","HomeScreenLayout", new { ID = records[j].ID, row = records[j].Row, col = records[j].Column})">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

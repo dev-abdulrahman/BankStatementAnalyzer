@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.BoxHeader = "List Of Products";
+    ViewBag.MainHeading = "Products";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Manage", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Manage","Product",new { id=item.ID})" class="text-blue font-size-14">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Manage","Product",new { id = item.ID})">Manage</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable({"order": [[0, "desc"]]});
+        });
+    </script>
+}

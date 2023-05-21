@@ -1,0 +1,15 @@
+﻿@using BankStatementAnalyzer.SuperAdmin.Helpers
+@model BankStatementAnalyzer.SuperAdmin.ViewModels.Roles.RoleVM
+@using (Html.BeginCollectionItem("Roles"))
+{
+
+    @Html.HiddenFor(m => m.RoleInfo.ID)
+    @Html.HiddenFor(m => m.RoleInfo.Name)
+    @Html.HiddenFor(m => m.RoleInfo.DefaultController)
+    @Html.HiddenFor(m => m.RoleInfo.DefaultAction)
+
+    <label class="custom-control custom-checkbox">
+        @Html.CheckBoxFor(m => m.IsSelected, new { @class = "custom-control-input", id = Model.RoleInfo.ID })
+        <span class="custom-control-label">@Model.RoleInfo.Name</span>
+    </label>
+}

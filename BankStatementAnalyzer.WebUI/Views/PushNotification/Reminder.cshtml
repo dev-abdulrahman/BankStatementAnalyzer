@@ -1,0 +1,145 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.PushNotificationDevices
+@{
+    ViewBag.Title = "Send Reminder";
+    ViewBag.BoxHeader = "Reminder to User";
+    ViewBag.MainHeading = "Send Reminder";
+}
+
+
+@using (Html.BeginForm("Reminder", "PushNotification", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p><b class="text-danger">Please select FromDate and ToDate to send notification to customers</b></p>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Enter Title", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @autocomplete = "Off" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Enter Message", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(model => model.Text, new { @class = "form-control", @autocomplete = "Off", @cols = "80" })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <label>
+                    From Date<span class="text-danger">*</span>
+                </label>
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.FromDate, new { @class = "form-control datepicker", @autocomplete = "Off" })
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "Text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                <label>To Date</label>
+                <div class="input-group" id="calenderIcon">
+                    @Html.TextBoxFor(model => model.ToDate, new { @class = "form-control datepickerToDate", @autocomplete = "Off" })
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "Text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.RadioButtonFor(model => model.UserType, BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser, new { @id = BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser, @class = "with-gap" })
+                @Html.Label(BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser.ToString())
+
+                @Html.RadioButtonFor(model => model.UserType, BankStatementAnalyzer.WebUI.ViewModels.UserType.AllUser, new { @id = BankStatementAnalyzer.WebUI.ViewModels.UserType.AllUser, @class = "with-gap" })
+                @Html.Label(BankStatementAnalyzer.WebUI.ViewModels.UserType.AllUser.ToString())
+            </div>
+        </div>
+        <div class="form-group" style="display:none;" id="selectUser">
+            @Html.Label("Select Customer", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("DeviceIds", new SelectList(new List<string>() { }), "Select Customer", new { @class = "form-control select2", @multiple = "multiple", @style = "width: 100%" })
+            </div>
+        </div>
+        <div class="box-body" style="display:none;" id="btnSubmit">
+            <div class="clearfix">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+
+        $(".select2").select2();
+
+        $(function () {
+            $(".datepicker").datepicker({ format: 'dd M yyyy' });
+        });
+
+        $("#FromDate").on("change", function () {
+            $(".datepickerToDate").datepicker({ format: 'dd M yyyy', startDate: $(this).val() });
+        })
+
+        $("#ToDate").on("change", function () {
+            var fromDate = $("#FromDate").val();
+            var toDate = $(this).val();
+
+            var getCustomerURL = "@Url.Action("GetCustomer", "PushNotification")";
+            var finalOptions = '<option>Select Customer</option>';
+
+            $.ajax({
+                url: getCustomerURL,
+                data: {fromDate:fromDate,toDate:toDate},
+                success: function (result) {
+                    $.each(result.result, function (index, item) {
+                        finalOptions += '<option value="' + item.Value + '">' + item.Text + '</option>';
+                    });
+
+                    $("#DeviceIds").html(finalOptions);
+                    $("#selectUsr").show();
+                    $("#btnSubmit").show();
+                }
+            });
+        })
+    </script>
+
+    <script>
+        $(".select2").select2();
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            if ('@BankStatementAnalyzer.WebUI.ViewModels.UserType.SelectUser' == '@Model.UserType')
+            {
+                $("#selectUser").show();
+            }
+            else
+            {
+                $("#selectUser").hide();
+            }
+        });
+    </script>
+
+    <script>
+        $("#SelectUser").click(function () {
+            $("#selectUser").show();
+        });
+    </script>
+
+    <script>
+        $("#AllUser").click(function () {
+            $("#selectUser").hide();
+        });
+    </script>
+}

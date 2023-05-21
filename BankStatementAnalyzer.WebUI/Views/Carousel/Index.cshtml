@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BankStatementAnalyzer.WebUI.ViewModels.CarouselViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Carousel";
+    ViewBag.BoxHeader = "Carousel List";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageCount)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageCount)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                <div class="dropdown-menu">
+                    <!-- <a class="dropdown-item" href="@Url.Action("Edit","Carousel",new { id = item.ID})">Edit</a>-->
+                    <a class="dropdown-item" href="@Url.Action("Delete","Carousel",new { id = item.ID})">Delete</a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({ "order": [[0, "asc"]] });
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.TimeSlot>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Available - Time";
+    ViewBag.BoxHeader = "Available - Time List";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.To)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var startTime = item.From.ToString("hh:mm tt");
+            var endTime = item.To.ToString("hh:mm tt");
+            <tr>
+                <td>
+                    @startTime
+                </td>
+                <td>
+                    @endTime
+                </td>
+                <td>
+                    @if (item.Status)
+                    {
+                        <span class="badge badge-pill badge-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-warning">In-Active</span>
+                    }
+
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Edit","TimeSlot",new { id = item.ID})">Edit</a>
+                        @*<a class="dropdown-item" href="@Url.Action("Delete","TimeSlot",new { id = item.ID})">Delete</a>*@
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable({"order": [[0, "desc"]]});
+        });
+    </script>
+}

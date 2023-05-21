@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.UnitOfMeasure>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.BoxHeader = "List of Unit of measure";
+    ViewBag.MainHeading = "Unit of measure";
+}
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Edit","UnitOfMeasure",new { id = item.ID})">Edit</a>
+                        <a class="dropdown-item" href="@Url.Action("Delete","UnitOfMeasure",new { id = item.ID})">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable({"order": [[0, "desc"]]});
+        });
+    </script>
+}

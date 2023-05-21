@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Gallery>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Gallery";
+    ViewBag.BoxHeader = "Gallery List";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageCategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="img_height_width">
+                    <a href="@Url.Action("EditImage",new { item.ID})"><img src="@(Url.Content("/images/gallery/") + item.File.Name)" class="img-fluid img-thumbnail"></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageCategory.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                @if (item.Status)
+                {
+                    <td>
+                        <span class="btn btn-success btn-round btn-sm">Active</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="btn btn-warning btn-round btn-sm">In-Active</span>
+                    </td>
+                }
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Edit","Gallery",new { id = item.ID})">Edit</a>
+                        <a class="dropdown-item" href="@Url.Action("Delete","Gallery",new { id = item.ID})">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({"order": [[0, "desc"]]});
+    </script>
+}

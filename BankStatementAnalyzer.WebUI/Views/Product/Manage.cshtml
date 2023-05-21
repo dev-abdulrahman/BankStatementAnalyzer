@@ -1,0 +1,422 @@
+﻿@model BankStatementAnalyzer.Models.Product
+@{
+    ViewBag.Title = "Manage";
+    ViewBag.BoxHeader = "Manage Product";
+    ViewBag.MainHeading = "Product";
+}
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<style>
+    .min-width {
+        min-width: 700px;
+    }
+
+    .Text-danger {
+        color: red;
+    }
+</style>
+<div>
+    @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-info" })
+</div>
+<br />
+
+<div class="vtabs customvtab">
+    <ul class="nav nav-tabs tabs-vertical" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#product" role="tab" aria-expanded="true"><span class="hidden-sm-up"><i class="ion-home"></i></span> <span class="hidden-xs-down">Product</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link disabled" data-toggle="tab" href="#category" role="tab" aria-expanded="true"><span class="hidden-sm-up"><i class="ion-home"></i></span> <span class="hidden-xs-down">Category</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link disabled" data-toggle="tab" href="#discount" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ion-person"></i></span> <span class="hidden-xs-down">Discount</span></a> </li>
+        <li class="nav-item"> <a class="nav-link disabled" data-toggle="tab" href="#image" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ion-person"></i></span> <span class="hidden-xs-down">Images</span></a> </li>
+        <li class="nav-item"> <a class="nav-link disabled" data-toggle="tab" href="#variant" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ion-email"></i></span> <span class="hidden-xs-down">Variant</span></a> </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content min-width">
+        <div class="tab-pane active" id="product" role="tabpanel" aria-expanded="true">
+            @using (Html.BeginForm("Manage", "Product", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-md-6 col-6">
+                        <div class="form-group">
+                            <label>Name<span class="text-danger">*</span></label>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @autocomplete = "Off", @tabindex = "1" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "Text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Short Title</label>
+                            @Html.TextBoxFor(model => model.ShortTitle, new { @class = "form-control", @autocomplete = "Off", @tabindex = "3" })
+                            @Html.ValidationMessageFor(model => model.ShortTitle, "", new { @class = "Text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>SKU</label>
+                                    @Html.TextBoxFor(model => model.SKU, new { @class = "form-control", @autocomplete = "Off", @tabindex = "5" })
+                                    @Html.ValidationMessageFor(model => model.SKU, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Liters</label>
+                                    @Html.TextBoxFor(model => model.Liters, new { @class = "form-control", @autocomplete = "Off", @tabindex = "6" })
+                                    @Html.ValidationMessageFor(model => model.Liters, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", @autocomplete = "Off", @tabindex = "9" })
+                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "Text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Is Product Returnable</label>
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsReturnAble)
+                                <br />
+                                <p>Select if the item is return able for example water cans.</p>
+                                @Html.ValidationMessageFor(model => model.IsReturnAble, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-6">
+                        <div class="form-group">
+                            <label>Product Title<span class="text-danger">*</span></label>
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @autocomplete = "Off", @tabindex = "2" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "Text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Code<span class="text-danger">*</span></label>
+                            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @autocomplete = "Off", @tabindex = "4" })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "Text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Price<span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @autocomplete = "Off", @tabindex = "7" })
+                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Unit of Measure</label>
+                                    @Html.DropDownListFor(model => model.UnitOfMeasureId, (IEnumerable<SelectListItem>)ViewBag.UOM, "Select UOM", new { @class = "form-control", @tabindex = "8" })
+                                    @Html.ValidationMessageFor(model => model.UnitOfMeasureId, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>
+                                        Activate On<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.ActivateOn, new { @class = "form-control datepicker", @autocomplete = "Off", @tabindex = "10" })
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ActivateOn, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Deactivate On</label>
+                                    <div class="input-group" id="calenderIcon">
+                                        @Html.TextBoxFor(model => model.DeactivateOn, new { @class = "form-control datepicker", @autocomplete = "Off", @tabindex = "11" })
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>If not selected product will be active always.</p>
+                                    @Html.ValidationMessageFor(model => model.DeactivateOn, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-mg-12 col-12">
+                        <div class="form-group">
+                            <label>Discription<span class="text-danger">*</span></label>
+                            @Html.TextAreaFor(model => model.Description, new { @id = "description", @class = "form-control", @autocomplete = "Off", @row = "3", @tabindex = "12" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "Text-danger" })
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="clearfix">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="tab-pane pad" id="category" role="tabpanel" aria-expanded="false">
+            @using (Html.BeginForm("Category", "Product", FormMethod.Post))
+            {
+                @Html.HiddenFor(x => x.ID)
+                <div class="row">
+                    <div class="col-md-6 col-6">
+                        <div class="form-group">
+                            <label>Category<span class="text-danger">*</span></label>
+                            @Html.DropDownListFor(model => model.CategoryId, (IEnumerable<SelectListItem>)ViewBag.Category, "Select Category", new { @class = "form-control", @autocomplete = "Off" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "Text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Sub category<span class="text-danger">*</span></label>
+                            @Html.DropDownList("DdSubCategory", new SelectList(new List<string>() { }), "Select Sub category", new { @class = "form-control" })
+                        </div>
+                        <div class="box-body">
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="tab-pane pad" id="discount" role="tabpanel" aria-expanded="false">
+            @using (Html.BeginForm("Discount", "Product", FormMethod.Post))
+            {
+                @Html.HiddenFor(x => x.ID)
+                <div class="row">
+                    <div class="col-md-6 col-6">
+                        <div class="form-group">
+                            <label>Discount Type<span class="text-danger">*</span></label>
+                            @Html.DropDownListFor(model => model.DiscountType, EnumHelper.GetSelectList(typeof(BankStatementAnalyzer.Models.DiscountType)), "Select Type", new { @class = "form-control", @autocomplete = "Off" })
+                            @Html.ValidationMessageFor(model => model.DiscountType, "", new { @class = "Text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>
+                                        Start date<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker", @autocomplete = "Off" })
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>End Date<span class="text-danger">*</span></label>
+                                    <div class="input-group" id="calenderIcon">
+                                        @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker", @autocomplete = "Off" })
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "Text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-6">
+                        <div class="form-group">
+                            <label>Special price<span class="text-danger">*</span></label>
+                            @Html.TextBoxFor(model => model.SpecialPrice, new { @class = "form-control", @autocomplete = "Off" })
+                            @Html.ValidationMessageFor(model => model.SpecialPrice, "", new { @class = "Text-danger" })
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="clearfix">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="tab-pane pad" id="image" role="tabpanel" aria-expanded="false">
+            <div class="row">
+                @foreach (var file in Model.Files.OrderByDescending(x => x.ID).Take(4))
+                {
+                    <div class="col-md-12 col-lg-3">
+                        <div class="box box-default">
+                            <div class="fx-card-item">
+                                <div class="fx-card-avatar fx-overlay-1">
+                                    <img src="@(Url.Content("/images/products/") + file.Path)" alt="user">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @using (Html.BeginForm("Images", "Product", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(x => x.ID)
+                <div class="col-12">
+                    <input type="file" name="Files" multiple accept="image/*" />
+                </div>
+                <div class="box-body">
+                    <div class="clearfix">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="tab-pane pad" id="variant" role="tabpanel" aria-expanded="false">
+            @using (Html.BeginForm("ProductVariant", "Product", FormMethod.Post))
+            {
+                <div class="row">
+                    @Html.HiddenFor(x => x.ID)
+                    <div class="col-md-6 col-6">
+                        <div class="form-group">
+                            <label>Style class<span class="text-danger">*</span></label>
+                            @Html.DropDownList("DdStyleClass", (IEnumerable<SelectListItem>)ViewBag.StyleClass, "Select Style Class", new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Style traits<span class="text-danger">*</span></label>
+                            @Html.DropDownList("DdStyleTrait", new SelectList(new List<string>() { }), "Select Style Trait", new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Style traits value<span class="text-danger">*</span></label>
+                            @Html.ListBoxFor(model => model.ListStyleVariantValue, (IEnumerable<SelectListItem>)ViewBag.StyleTraitValue, new { @class = "form-control select2", @multiple = "multiple", @style = "width: 100%" })
+                        </div>
+                        <div class="clearfix">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @section scripts{
+        <script>
+        CKEDITOR.replace('description');
+
+        $(document).ready(function () {
+            var styleTraitUrl = "@Url.Action("DDStyleTraitByStyleClassId","Product")";
+            var finalTraitOptions = '<option>Select Style Trait</option>'
+            var finalTraitUrl = styleTraitUrl + '/' + @Model.DdStyleClass;
+
+            $.ajax({
+                url: finalTraitUrl,
+                success: function (styleTrait) {
+
+                    $.each(styleTrait, function (index, item) {
+                        if ('@Model.DdStyleClass' == item.ID) {
+                            finalTraitOptions += '<option value="' + item.ID + '" selected="selected">' + item.Name + '</option>';
+                        }
+                        else {
+                             finalTraitOptions += '<option value="' + item.ID + '">' + item.Name + '</option>';
+                        }
+                    });
+
+                     $("#DdStyleTrait").html(finalTraitOptions);
+                    }
+            });
+
+            var subcategoryUrl = "@Url.Action("DDSubcategoryByCategoryId", "Product")";
+            var finalSubCatOptions = '<option>Select Sub Category</option>'
+            var finalSubCatUrl = subcategoryUrl + '/' + @Model.CategoryId;
+
+             $.ajax({
+                url: finalSubCatUrl,
+                success: function (subCategoryValue) {
+                    $.each(subCategoryValue, function (index, item) {
+                        if ('@Model.SubCategoryId' == item.ID) {
+                            finalSubCatOptions += '<option value="' + item.ID + '" selected="selected">' + item.Name + '</option>';
+                        } else {
+                            finalSubCatOptions += '<option value="' + item.ID + '">' + item.Name + '</option>';
+                        }
+                    });
+
+                     $("#DdSubCategory").html(finalSubCatOptions);
+                    }
+             });
+
+
+            $(".btnSubmit").click(function () {
+
+                if (validation() == true) {
+                    $("#cust-submit").submit();
+                }
+            });
+      });
+        </script>
+
+        <script>
+        if(@Model.ID > 0)
+        {
+           $(".nav-link").removeClass("disabled")
+        }
+        </script>
+        <script>
+            $(function () {
+                $(".datepicker").datepicker({ format: 'dd M yyyy' });
+            });
+        </script>
+        <script>
+        $('input[type="file"]').imageuploadify();
+
+        $(".select2").select2();
+
+        var styleTraitUrl = "@Url.Action("DDStyleTraitByStyleClassId","Product")";
+        $("#DdStyleClass").change(function () {
+
+            var finalOptions = '<option>Select Style Trait</option>'
+            var finalUrl = styleTraitUrl + '/' + $(this).val();
+
+            $.ajax({
+                url: finalUrl,
+                success: function (styleTrait) {
+
+                    $.each(styleTrait, function (index, item) {
+
+                        finalOptions += '<option value="' + item.ID + '">' + item.Name + '</option>';
+                    });
+
+                     $("#DdStyleTrait").html(finalOptions);
+                    }
+            });
+        });
+
+        var styleTraitValUrl = "@Url.Action("DDStyleTraitValueByStyleTraitId","Product")";
+        $("#DdStyleTrait").change(function () {
+
+            var finalOptions = '<option>Select Style Trait</option>'
+            var finalUrl = styleTraitValUrl + '/' + $(this).val();
+
+            $.ajax({
+                url: finalUrl,
+                success: function (styleTraitValue) {
+                    console.log(styleTraitValue)
+                    $.each(styleTraitValue, function (index, item) {
+
+                        finalOptions += '<option value="' + item.ID + '">' + item.Value + '</option>';
+                    });
+
+                     $("#ListStyleVariantValue").html(finalOptions);
+                    }
+            });
+        });
+
+        var subcategoryUrl = "@Url.Action("DDSubcategoryByCategoryId", "Product")";
+
+        $("#CategoryId").change(function () {
+            var finalOptions = '<option>Select Sub Category</option>'
+            var finalUrl = subcategoryUrl + '/' + $(this).val();
+
+             $.ajax({
+                url: finalUrl,
+                success: function (subCategoryValue) {
+                    $.each(subCategoryValue, function (index, item) {
+
+                        finalOptions += '<option value="' + item.ID + '">' + item.Name + '</option>';
+                    });
+
+                     $("#DdSubCategory").html(finalOptions);
+                    }
+            });
+        });
+        </script>
+    }

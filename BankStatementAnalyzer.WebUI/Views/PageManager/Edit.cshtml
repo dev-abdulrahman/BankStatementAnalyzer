@@ -1,0 +1,79 @@
+﻿@model BankStatementAnalyzer.Models.PageManager
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.MainHeading = "Edit";
+    ViewBag.BoxHeader = " Edit Page Manager";
+}
+
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PageName, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PageName, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                @Html.ValidationMessageFor(model => model.PageName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PageTitle, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PageTitle, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                @Html.ValidationMessageFor(model => model.PageTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PageMetaKeyword, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PageMetaKeyword, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                @Html.ValidationMessageFor(model => model.PageMetaKeyword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PageMetaDescription, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PageMetaDescription, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                @Html.ValidationMessageFor(model => model.PageMetaDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PageDescription, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.PageDescription, new { @id = "description", @class = "form-control", @autocomplete = "Off", @cols = "80" })
+                @Html.ValidationMessageFor(model => model.PageDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateAnother, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CreateAnother)
+                    @Html.ValidationMessageFor(model => model.CreateAnother, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        CKEDITOR.replace('description');
+    </script>
+}

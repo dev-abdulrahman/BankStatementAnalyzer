@@ -1,0 +1,61 @@
+﻿@model BankStatementAnalyzer.Models.SubCategory
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.MainHeading = "Edit Subcategory";
+    ViewBag.BoxHeader = "Edit Subcategory";
+}
+
+@using (Html.BeginForm("Edit", "Subcategory", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <!--//@*@Html.HiddenFor(x => x.CompanyId)*@-->
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.ID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.CategoryID, new SelectList(ViewBag.CategoryList, "Id", "Name"), "Select Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <!-- <div class="form-group">
+         @Html.LabelFor(model => model.ParentId, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-6">
+             @Html.DropDownListFor(model => model.ParentId, new SelectList(ViewBag.subCategoryList, "Id", "Name"), "Select Category", new { @class = "form-control" })
+             @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+         </div>
+     </div>-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Key, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                @Html.ValidationMessageFor(model => model.Key, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @col = "80", @autocomplete = "Off" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<!--
+<div>
+   @* @Html.ActionLink("Back to List", "Edit", "Subcategory", new { ID = Model.CategoryID }, null)*@
+</div>
+-->

@@ -1,0 +1,192 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Completed Orders";
+    ViewBag.BoxHeader = "Completed Order List";
+}
+
+
+<div class="col-6 row mb-5">
+    <div class="col-6">
+        @using (Html.BeginForm("Export", "Orders", FormMethod.Post, new { @novalidate = "novalidate", @id = "formExportExcel" }))
+        {
+            <input type="submit" id="test" class="btn btn-primary btn-block" value="Export To Excel" />
+            @Html.Hidden("exportOrderIds", new { @id = "exportOrderIds" })
+        }
+    </div>
+</div>
+
+<div class="table-light">
+    <table id="datatables" class="table table-bordered data-striped">
+        <thead>
+            <tr>
+                <th style="width: 21px;padding-left: 20px;padding-bottom: 20px;padding-right: 20px;">
+                </th>
+                <th>
+                    Order Status
+                </th>
+                <th>
+                    Order Type
+                </th>
+                <th>
+                    Customer
+                </th>
+                <th>
+                    Order Date
+                </th>
+                <th>
+                    Order Id
+                </th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+@section scripts{
+
+    @Styles.Render("~/Content/DatatableCheckbox")
+    <script src="~/Scripts/dataTables.checkboxes.min.js"></script>
+
+    <script>
+        var datatables = $("#datatables").DataTable({
+            "bAutoWidth": false,
+                "bServerSide": true,
+                "bJQueryUI": false,
+                "bAutoWidth": false,
+                "sAjaxSource": '@Url.Action("Completed")',
+                "fnServerData": function (sSource, aoData, fnCallback) {
+                $.ajax({
+                    "dataType": 'json',
+                    "type": "POST",
+                    "url": sSource,
+                    "data": aoData,
+                    "success": fnCallback
+                });
+            },
+                "aaSorting": [[4, 'desc']],
+                "aoColumns": [
+                    { "sName": "ID", "sWidth": 20, "bSortable": false, "bSearchable": false, "bUseRendered": false },
+                    { "sName": "OrderStatus", "sWidth": 100,"bSortable": false, "bSearchable": false, "bUseRendered": false },
+                    { "sName": "OrderType", "sWidth": 60,  "bSortable": true },
+                    { "sName": "Customer.Username", "sWidth": 120},
+                    { "sName": "UpdatedDate", "sWidth": 80 },
+                    { "sName": "", "sWidth": 120, mRender: make_orderId, "bSortable": false }
+                      ],
+            'columnDefs': [
+                {
+                    'targets': 0 ,
+                    'checkboxes': {
+                        'selectRow': true
+                    }
+                }],
+            'select': {
+                'style': 'multi'
+            }
+        });
+
+        $('#formExportExcel').on('submit', function (e) {
+            var form = this;
+            var rows_selected = datatables.column(0).checkboxes.selected();
+            var ids = "";
+            $.each(rows_selected, function (index, rowId) {
+                ids = ids + rowId + ",";
+            });
+            $('#exportOrderIds').val(ids);
+            return true;
+        });
+
+        function make_orderId(data, type, row) {
+             var id = row[0];
+            var orderDetail = '@Url.Action("Details", "Orders")?id=' + id;
+              return "<a href='" + orderDetail + "' class=text-info>"+ id +"</a>";
+        }
+    </script>
+}
+
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Order Id")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerName)
+                </th>
+                <th>
+                    @Html.DisplayName("Date")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details","Orders",new { id = item.ID})"><span class="text-blue">@item.ID</span></a>
+                    </td>
+                    @if (item.OrderType == BankStatementAnalyzer.Models.OrderType.Insta)
+                    {
+                        <td>
+                            <span class="">Insta Service</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <span class="">Scheduled Service</span>
+                        </td>
+                    }
+                    @if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Ordered)
+                    {
+                        <td>
+                            <span class="">Ordered</span>
+                        </td>
+                    }
+                    else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Assigned)
+                    {
+                        <td>
+                            <span class="">Assigned for delivery</span>
+                        </td>
+                    }
+                    else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Completed)
+                    {
+                        <td>
+                            <span class="btn btn-success btn-round btn-sm">Delivered</span>
+                        </td>
+                    }
+                    else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Cancelled)
+                    {
+                        <td>
+                            <span class="">Cancelled</span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            -
+                            <span class="btn btn-danger btn-round btn-sm">-</span>
+                        </td>
+                    }
+    <td>
+        @Html.DisplayFor(modelItem => item.CustomerName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdatedDate.Value)
+    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @section scripts{
+        <script>
+            $('.table').DataTable({ "order": [[0, "desc"]] });
+        </script>
+    }*@

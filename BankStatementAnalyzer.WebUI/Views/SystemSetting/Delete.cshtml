@@ -1,0 +1,61 @@
+﻿@model BankStatementAnalyzer.Models.SystemSetting
+
+@{
+
+    ViewBag.Title = "DeletePost";
+    ViewBag.MainHeading = "System Setting Details";
+    ViewBag.BoxHeader = "Delete System Setting";
+}
+
+
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SettingTypeValue)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SettingTypeValue)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Value)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Value)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" col="md-4">
+                @Html.Partial("FooterButtonsPV")
+
+            </div>
+        }
+    </div>
+

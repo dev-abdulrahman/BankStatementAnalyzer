@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <title>@ViewBag.Title - Delivery Management</title>
+    <link rel="stylesheet" href="~/Content/theme/css/font-awesome.min.css" />
+    <link href="~/Content/theme/css/fonts.googleapis.min.css" rel="stylesheet" />
+    <link href="~/Content/theme/plugins/maps-google/plugin.css" rel="stylesheet" />
+    <link href="~/Content/theme/css/dashboard.css" rel="stylesheet" />
+    <link href="~/Content/theme/css/toast/jquery.toast.css" rel="stylesheet" />
+    <script src="~/Content/theme/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/theme/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/theme/js/vendors/selectize.min.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery.tablesorter.min.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery-jvectormap-de-merc.js"></script>
+    <script src="~/Content/theme/js/vendors/jquery-jvectormap-world-mill.js"></script>
+    <script src="~/Content/theme/js/vendors/circle-progress.min.js"></script>
+    <link href="~/Content/theme/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <script src="~/Content/theme/plugins/charts-c3/js/c3.min.js"></script>
+    <script src="~/Content/theme/plugins/charts-c3/js/d3.v3.min.js"></script>
+    <script src="~/Content/theme/plugins/input-mask/js/jquery.mask.min.js"></script>
+    <script src="~/Content/theme/plugins/datatables/datatables.min.js"></script>
+    <script src="~/Content/theme/js/toast/jquery.toast.js"></script>
+</head>
+<body class="">
+    <div class="page">
+        <div class="flex-fill">
+            <div class="header py-4">
+                <div class="container">
+                    <div class="d-flex">
+                        <a class="header-brand" href="@Url.Action("Index","Home")">
+                            <img src="~/Content/theme/images/logo/dmlogo.jpg" class="header-brand-img" alt="tabler logo">
+                            <span>Delivery Management</span>
+                        </a>
+                        <div class="d-flex order-lg-2 ml-auto">
+                            @*@{Html.RenderPartial("_Notifications");}*@
+                            @{Html.RenderPartial("_Profile");}
+                        </div>
+                        <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                            <span class="header-toggler-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+                @{Html.RenderPartial("_Menu");}
+            </div>
+            <div class="my-3 my-md-5">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+                        Copyright © @DateTime.Now.Year <a href=".">ReliableInfosys</a>. Theme by <a href="https://codecalm.net" target="_blank">codecalm.net</a> All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+<script type="text/javascript">
+        $(function () {
+            @if (TempData["success-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'Success',
+                    text: '@TempData["success-message"]',
+                    position: 'top-right',
+                    icon: 'success',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+
+            @if (TempData["error-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'Error',
+                    text: '@TempData["error-message"]',
+                    position: 'top-right',
+                    icon: 'error',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+            @if (TempData["warning-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'warning',
+                    text: '@TempData["warning-message"]',
+                    position: 'top-right',
+                    icon: 'warning',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+        });
+</script>
+@RenderSection("scripts", required: false)
+</html>

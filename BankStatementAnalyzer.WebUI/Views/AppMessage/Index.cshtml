@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.AppMessage>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "AppMessage";
+    ViewBag.BoxHeader = "AppMessage List";
+}
+
+@*<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key)
+                </td>
+                @if (item.Status)
+                {
+                    <td>
+                        <span class="btn btn-success btn-round btn-sm">Active</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="btn btn-warning btn-round btn-sm">In-Active</span>
+                    </td>
+                }
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Edit","AppMessage",new { id = item.ID})">Edit</a>
+                        @*<a class="dropdown-item" href="@Url.Action("Delete","AppMessage",new { id = item.ID})">Delete</a>*@
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({"order": [[0, "desc"]]});
+    </script>
+}

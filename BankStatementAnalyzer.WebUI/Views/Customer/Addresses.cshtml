@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Address>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Addresses";
+    ViewBag.BoxHeader = "Addresses List";
+}
+<div class="row">
+    <div class="col-xl-6 col-md-6 col-6">
+        <div class="box">
+            @foreach (var address in Model)
+            {
+                using (Html.BeginForm("MapAddress", "Customer", FormMethod.Post))
+                {
+                    <input type="hidden" name="addressId" value="@address.ID" />
+                    <div class="box-header with-border bg-secondary">
+                        <h5 class="box-title">@address.Name</h5>
+                    </div>
+                    <div class="box-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <p>@address.DeliveryAddress</p>
+                                <p>@address.Area</p>
+                                <p>@address.LandMark</p>
+                                <div class="d-inline-block pull-right">
+                                    <button type="submit" class="btn btn-success pull-right">Use This Address</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6 col-6">
+        @using (Html.BeginForm("AddressCreate", "Customer", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="Name" value="">
+            </div>
+            <div class="form-group">
+                <label>Flat</label>
+                <input type="text" class="form-control" name="Flat" value="">
+            </div>
+            <div class="form-group">
+                <label>Area</label>
+                <input type="text" class="form-control" name="Area" value="">
+            </div>
+            <div class="form-group">
+                <label>LandMark</label>
+                <input type="text" class="form-control" name="LandMark" value="">
+            </div>
+            <div class="form-group">
+                <label>DeliveryAddress</label>
+                <input type="text" class="form-control" name="DeliveryAddress" value="">
+            </div>
+            <div class="form-group">
+                <label>Latitude</label>
+                <input type="text" class="form-control" name="Latitude" value="">
+            </div>
+            <div class="form-group">
+                <label>Longitude</label>
+                <input type="text" class="form-control" name="Longitude" value="">
+            </div>
+            <div class="form-group">
+                <label>Address Type</label>
+                <div class="col-md-6">
+                    @Html.RadioButton("AddressType", BankStatementAnalyzer.Models.AddressType.Home, new { @id = BankStatementAnalyzer.Models.AddressType.Home, @class = "with-gap" })
+                    @Html.Label(BankStatementAnalyzer.Models.AddressType.Home.ToString())
+                    @Html.RadioButton("AddressType", BankStatementAnalyzer.Models.AddressType.Office, new { @id = BankStatementAnalyzer.Models.AddressType.Office, @class = "with-gap" })
+                    @Html.Label(BankStatementAnalyzer.Models.AddressType.Office.ToString())
+                    @Html.RadioButton("AddressType", BankStatementAnalyzer.Models.AddressType.Other, new { @id = BankStatementAnalyzer.Models.AddressType.Other, @class = "with-gap" })
+                    @Html.Label(BankStatementAnalyzer.Models.AddressType.Other.ToString())
+                </div>
+            </div>
+            <div class="d-inline-block pull-right">
+                <button type="submit" class="btn btn-success pull-right">Create</button>
+            </div>
+        }
+    </div>
+</div>

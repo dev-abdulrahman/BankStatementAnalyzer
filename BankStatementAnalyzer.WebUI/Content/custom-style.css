@@ -1,0 +1,22 @@
+﻿.box-with-shadow{
+    box-shadow: 2px 2px 2px 1px;
+    margin: 5px 5px 5px 5px;
+    border: solid 1px;
+    padding: 5px 5px 5px 5px;
+}
+
+.box-without-border
+{
+    box-shadow: black 2px 2px 1px 1px;
+    padding: inherit;
+}
+
+.print-header-box{
+    padding: inherit;
+    border: solid;
+    border-width: 1px;
+    margin-right: 3pc;
+    margin-left: 48px;
+    margin-bottom: 16px;    
+    -webkit-print-color-adjust: exact;
+}

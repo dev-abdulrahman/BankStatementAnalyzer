@@ -1,0 +1,89 @@
+﻿@model BankStatementAnalyzer.Models.Order
+<div class="dropdown-menu">
+    <a class="dropdown-item" href="@Url.Action("Details","Orders",new { id = Model.ID})">Details</a>
+    <div class="dropdown-divider"></div>
+    @if (Model.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Ordered)
+    {
+        if (Model.OrderType.Key == "WhatsApp" && Model.OrderStatus != BankStatementAnalyzer.Models.OrderStatus.Cancelled)
+        {
+            <a class="dropdown-item" href="@Url.Action("Addresses","Customer",new { customerId = Model.CustomerID , orderId =Model.ID})">Map Address</a>
+        }
+        else
+        {
+            <a class="dropdown-item disabled" href="#">Map Address</a>
+        }
+        <a class="dropdown-item" href="@Url.Action("Assign","Orders",new { id = Model.ID})">Assign to Pickup</a>
+        <a class="dropdown-item" href="@Url.Action("Cancel","Orders",new { id = Model.ID})">Cancel</a>
+        <a class="dropdown-item disabled" href="#">Add Order Items</a>
+        <a class="dropdown-item disabled" href="#">Assign To Vendor</a>
+        <a class="dropdown-item disabled" href="#">Pickup From Vendor</a>
+        <a class="dropdown-item disabled" href="#">Assign For Delivery</a>
+        <a class="dropdown-item disabled" href="#">Mark Delivered</a>
+    }
+    else if (Model.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.AssignedForPickUp)
+    {
+        <a class="dropdown-item disabled" href="#">Map Address</a>
+        <a class="dropdown-item disabled" href="">Assign to Pickup</a>
+        if (Model.OrderType.Key == "Customize")
+        {
+            <a class="dropdown-item" href="@Url.Action("OrderListItem","Orders",new { id = Model.ID , redirectAction = Model.OrderType.Key})">Order Items</a>
+        }
+        else
+        {
+            <a class="dropdown-item" href="@Url.Action("OrderListItem","Orders",new { id = Model.ID , redirectAction = Model.OrderType.Key})">Add Order Items</a>
+        }
+        <a class="dropdown-item disabled" href="#">Assign To Vendor</a>
+        <a class="dropdown-item disabled" href="#">Pickup From Vendor</a>
+        <a class="dropdown-item disabled" href="#">Assign For Delivery</a>
+        <a class="dropdown-item disabled" href="#">Mark Delivered</a>
+    }
+    else if (Model.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.PickedUp)
+    {
+        <a class="dropdown-item disabled" href="#">Map Address</a>
+        <a class="dropdown-item disabled" href="">Assign to Pickup</a>
+        <a class="dropdown-item disabled" href="#">Add Order Items</a>
+        <a class="dropdown-item" href="@Url.Action("AssignToVendor","Orders",new { id = Model.ID , redirectAction = Model.OrderType.Key})">Assign To Vendor</a>
+        <a class="dropdown-item disabled" href="#">Pickup From Vendor</a>
+        <a class="dropdown-item disabled" href="#">Assign For Delivery</a>
+        <a class="dropdown-item disabled" href="#">Mark Delivered</a>
+    }
+    else if (Model.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.UnderProcessing)
+    {
+        <a class="dropdown-item disabled" href="#">Map Address</a>
+        <a class="dropdown-item disabled" href="">Assign to Pickup</a>
+        <a class="dropdown-item disabled" href="#">Add Order Items</a>
+        <a class="dropdown-item disabled" href="#">Assign To Vendor</a>
+        <a class="dropdown-item" href="@Url.Action("PickupFromVendor","Orders",new { id = Model.ID , redirectAction = Model.OrderType.Key})">Pickup From Vendor</a>
+        <a class="dropdown-item disabled" href="#">Assign For Delivery</a>
+        <a class="dropdown-item disabled" href="#">Mark Delivered</a>
+    }
+    else if (Model.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.ReadyForDelivery)
+    {
+        <a class="dropdown-item disabled" href="#">Map Address</a>
+        <a class="dropdown-item disabled" href="">Assign to Pickup</a>
+        <a class="dropdown-item disabled" href="#">Add Order Items</a>
+        <a class="dropdown-item disabled" href="#">Assign To Vendor</a>
+        <a class="dropdown-item disabled" href="#">Pickup From Vendor</a>
+        <a class="dropdown-item" href="@Url.Action("AssignForDelviery","Orders",new { id = Model.ID , redirectAction = Model.OrderType.Key})">Assign For Delivery</a>
+    }
+    else if (Model.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.AssignedForDelivery)
+    {
+        <a class="dropdown-item disabled" href="#">Map Address</a>
+        <a class="dropdown-item disabled" href="">Assign to Pickup</a>
+        <a class="dropdown-item disabled" href="#">Add Order Items</a>
+        <a class="dropdown-item disabled" href="#">Assign To Vendor</a>
+        <a class="dropdown-item disabled" href="#">Pickup From Vendor</a>
+        <a class="dropdown-item disabled" href="#">Assign For Delivery</a>
+        <a class="dropdown-item" href="@Url.Action("MarkDelivered","Orders",new { id = Model.ID , redirectAction = Model.OrderType.Key})">Mark Delivered</a>
+    }
+    else
+    {
+        <a class="dropdown-item disabled" href="#">Map Address</a>
+        <a class="dropdown-item disabled" href="">Assign to Pickup</a>
+        <a class="dropdown-item disabled" href="#">Add Order Items</a>
+        <a class="dropdown-item disabled" href="#">Assign To Vendor</a>
+        <a class="dropdown-item disabled" href="#">Pickup From Vendor</a>
+        <a class="dropdown-item disabled" href="#">Assign For Delivery</a>
+        <a class="dropdown-item disabled" href="#">Mark Delivered</a>
+    }
+</div>

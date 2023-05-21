@@ -1,0 +1,27 @@
+﻿@model BankStatementAnalyzer.WebUI.Models.DatePickerScriptModel
+
+@{
+    var startDateExpression = string.Empty;
+
+    if (Model.StartDate.HasValue)
+    {
+        startDateExpression = string.Format(@"startDate: '{0}',", Model.StartDate.Value.ToString("dd MMM yyyy"));
+    }
+
+    var endDateExpression = string.Empty;
+
+    if (Model.EndDate.HasValue)
+    {
+        endDateExpression = string.Format(@"endDate: '{0}'", Model.EndDate.Value.ToString("dd MMM yyyy"));
+    }
+}
+
+<script>
+    $(function () {
+        $("#@(Model.TextBoxId)").datepicker({
+            format: 'dd M yyyy',
+            @Html.Raw(startDateExpression)
+            @Html.Raw(endDateExpression)
+        })
+    });
+</script>

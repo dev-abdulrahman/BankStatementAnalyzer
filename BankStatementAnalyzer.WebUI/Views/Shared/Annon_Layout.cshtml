@@ -1,0 +1,90 @@
+﻿@using System.Web;
+@using BankStatementAnalyzer.Models;
+@{
+    ViewBag.SideNameBold = "ask";
+    ViewBag.SideNameRegular = "Me";
+}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from lion-admin-templates.multipurposethemes.com/lion-admin/main/pages/layout/collapsed-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Jul 2018 18:55:26 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/favicon.ico">
+    <title>@ViewBag.Title - askMe</title>
+
+
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/content/Select2")
+    @Styles.Render("~/content/ImageUplodify")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/ImageUplodify")
+    @Scripts.Render("~/bundles/Select2")
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
+<body class="hold-transition skin-blue-light sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <div class="box-body">
+            @RenderBody()
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right d-none d-sm-inline-block">
+                <b>Version</b> 1.1
+            </div>
+            Copyright &copy; @DateTime.Now.Year <a href="https://test.e-laundry.in/">askMe</a>. All Rights Reserved.
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            @if (TempData["success-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'Success',
+                    text: '@TempData["success-message"]',
+                    position: 'top-right',
+                    icon: 'success',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+
+            @if (TempData["error-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'Error',
+                    text: '@TempData["error-message"]',
+                    position: 'top-right',
+                    icon: 'error',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+            @if (TempData["warning-message"] != null)
+            {
+            <text>
+            $.toast({
+                    heading: 'warning',
+                    text: '@TempData["warning-message"]',
+                    position: 'top-right',
+                    icon: 'warning',
+                    hideAfter: 5000
+            });
+            </text>
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+<!-- Mirrored from lion-admin-templates.multipurposethemes.com/lion-admin/main/pages/layout/collapsed-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Jul 2018 18:55:37 GMT -->
+</html>

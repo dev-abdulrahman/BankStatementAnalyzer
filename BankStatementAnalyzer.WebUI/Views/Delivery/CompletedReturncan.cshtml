@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.ReturnRequest>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Completed";
+    ViewBag.BoxHeader = "Completed List";
+}
+
+<table class="table table-responsive-lg">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfCans)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnRequestType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remark)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details","ReturnCan",new { id = item.ID})"><span class="text-blue">@item.NoOfCans</span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnRequestType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remark)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({"order": [[0, "desc"]]});
+
+        $(document).ready(function () {
+            $('.hidebtn').hide()
+        });
+    </script>
+}

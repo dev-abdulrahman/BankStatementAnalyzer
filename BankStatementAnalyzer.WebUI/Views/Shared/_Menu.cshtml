@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Menu>
+
+<ul class="sidebar-menu" data-widget="tree">
+    @foreach (var menu in Model.OrderBy(x => x.Order))
+    {
+        if (menu.Children.Count == 0)
+        {
+            <li>
+                <a href="@Url.Action(menu.ActionName, menu.Controller)">
+                    <i class="@menu.Icon"></i> <span>@menu.DisplayName</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="treeview">
+                <a href="#">
+                    <i class="@menu.Icon"></i> <span>@menu.DisplayName</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    @foreach (var child in menu.Children.OrderBy(x => x.Order))
+                    {
+                        <li>
+                            <a href="@Url.Action(child.ActionName, child.Controller)">
+                                <i class="@child.Icon"></i><span>@child.DisplayName</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    }
+</ul>

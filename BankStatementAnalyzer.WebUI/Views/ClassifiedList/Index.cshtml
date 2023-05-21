@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Classified>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Classified";
+    ViewBag.BoxHeader = "Classified List";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("Edit","ClassifiedList",new { id = item.ID})">Edit</a>
+                    <a class="dropdown-item" href="@Url.Action("Delete","ClassifiedList",new { id = item.ID})">Delete</a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({ "order": [[0, "asc"]] });
+    </script>
+}

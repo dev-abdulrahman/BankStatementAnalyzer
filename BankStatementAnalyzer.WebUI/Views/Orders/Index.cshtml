@@ -1,0 +1,120 @@
+﻿@model IEnumerable<BankStatementAnalyzer.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MainHeading = "Orders";
+    ViewBag.BoxHeader = "All Order List";
+}
+
+<table class="table table-responsive table-responsive-lg">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Order Id")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsUrgent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details","Orders",new { id = item.ID})"><span class="text-blue">@item.ID</span></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderType.Name)
+                </td>
+                @if (item.IsUrgent)
+                {
+                    <td>
+                        <span class="">Yes</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="">No</span>
+                    </td>
+                }
+                @if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Ordered)
+                {
+                    <td>
+                        <span class="">Ordered</span>
+                    </td>
+                }
+                else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.AssignedForPickUp)
+                {
+                    <td>
+                        <span class="">Assigned for delivery</span>
+                    </td>
+                }
+                else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Delivered)
+                {
+                    <td>
+                        <span class="">Delivered</span>
+                    </td>
+                }
+                else if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Cancelled)
+                {
+                    <td>
+                        <span class="">Cancelled</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        -
+                        @*<span class="btn btn-danger btn-round btn-sm">-</span>*@
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Details","Orders",new { id = item.ID})">Details</a>
+                        @if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.Ordered)
+                        {
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("Assign","Orders",new { id = item.ID})">Assign to Pickup</a>
+                            <a class="dropdown-item" href="@Url.Action("Cancel","Orders",new { id = item.ID})">Cancel</a>
+                        }
+                        @if (item.OrderStatus == BankStatementAnalyzer.Models.OrderStatus.AssignedForPickUp)
+                        {
+                            <a class="dropdown-item" href="@Url.Action("SendEmail","Orders",new { id = item.ID})">Send Email</a>
+                        }
+
+                        @if (item.OrderType.Name == "What's App" && item.OrderStatus != BankStatementAnalyzer.Models.OrderStatus.Cancelled)
+                        {
+                            <a class="dropdown-item" href="@Url.Action("Addresses","Customer",new { customerId = item.CustomerID , orderId =item.ID})">Map Address</a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('.table').DataTable({ "order": [[0, "desc"]] });
+    </script>
+}

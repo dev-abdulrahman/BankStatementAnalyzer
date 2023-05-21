@@ -1,0 +1,78 @@
+﻿@model BankStatementAnalyzer.Models.SubCategory
+
+@{
+    ViewBag.Title = "Create Subcategory";
+    ViewBag.MainHeading = "Subcategory";
+    ViewBag.BoxHeader = "Create Subcategory";
+}
+
+@if (ViewBag.IsExist != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+        @ViewBag.IsExist
+    </div>
+}
+
+@using (Html.BeginForm("Create", "Subcategory", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.DropDownListFor(model => model.CategoryID, new SelectList(ViewBag.CategoryList, "ID", "Name"), "Select Category", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!-- <div class="form-group">
+         @Html.LabelFor(model => model.ParentId, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-6">
+             @Html.DropDownListFor(model => model.ParentId, new SelectList(ViewBag.subCategoryList, "Id", "Name"), "Select Category", new { @class = "form-control" })
+             @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+         </div>
+     </div>-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Key, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Key, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+            @Html.ValidationMessageFor(model => model.Key, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @col = "80", @autocomplete = "Off" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Key').keyup(function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+        });
+    </script>
+}

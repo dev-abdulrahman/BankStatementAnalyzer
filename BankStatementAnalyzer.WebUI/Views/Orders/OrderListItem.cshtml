@@ -1,0 +1,269 @@
+﻿@model BankStatementAnalyzer.WebUI.ViewModels.OrderVM
+@{
+    ViewBag.Title = "Order Items List";
+    ViewBag.MainHeading = "Orders Items";
+    ViewBag.BoxHeader = "Order Items";
+}
+
+<div class="row invoice-info">
+    <div class="col-12 col-lg-10 invoice-col">
+        <div class="mb-10 bb-1">
+            <h3><strong class="text-blue">@Model.Order.Customer.Email</strong></h3>
+            <address>
+                Address:<b> @Model.Order.Address.DeliveryAddress</b><br>
+                FLat:<b> @Model.Order.Address.Flat</b><br>
+                Area:<b> @Model.Order.Address.Area</b><br>
+                Landmark:<b> @Model.Order.Address.LandMark</b><br>
+                Phone:<b> @Model.Order.Customer.PhoneNumber</b><br />
+                Email:<b> @Model.Order.Customer.Email</b>
+            </address>
+            <h4>Updated on: <strong class="text-primary">@Model.Order.UpdatedDate.Value.ToString("dd MMM yyyy")</strong></h4>
+            <h4>Order Type: <strong class="text-danger">@Model.Order.OrderType.Name</strong></h4>
+            <h4>Payment mode: <strong class="text-danger">@Model.Order.PaymentType</strong></h4>
+        </div>
+    </div>
+</div>
+
+<h3><strong class="text-blue">Create Order Items</strong></h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("ServiceType Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.OrderDetail.ServiceTypeID, (IEnumerable<SelectListItem>)ViewBag.ServiceType, "Select Service Type", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OrderDetail.ServiceTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Cloths Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.OrderDetail.ClothsID, (IEnumerable<SelectListItem>)ViewBag.Cloths, "Select Cloths", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OrderDetail.ClothsID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.OrderDetail.Quantity, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.OrderDetail.Quantity, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.OrderDetail.Quantity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.OrderDetail.Price, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.OrderDetail.Price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.OrderDetail.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.OrderDetail.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.OrderDetail.Description, new { @id = "description", @class = "form-control", @autocomplete = "Off", @cols = "80" })
+                        @Html.ValidationMessageFor(model => model.OrderDetail.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.Order.OrderType.Name != "Package")
+        {
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.OrderDetail.IsUrgent, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.OrderDetail.IsUrgent, new { @class = "form-control", })
+                            @Html.ValidationMessageFor(model => model.OrderDetail.IsUrgent, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.IsEdit)
+        {
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.OrderDetail.Remark, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.OrderDetail.Remark, new { @id = "description", @class = "form-control", @autocomplete = "Off", @cols = "80" })
+                            @Html.ValidationMessageFor(model => model.OrderDetail.Remark, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (!Model.IsEdit)
+        {
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.CreateAnother, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.CreateAnother)
+                            @Html.ValidationMessageFor(model => model.CreateAnother, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @if (Model.Order.OrderDetails.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Service Type")
+                </th>
+                <th>
+                    @Html.DisplayName("Cloth Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Quantity")
+                </th>
+                <th>
+                    @Html.DisplayName("Price")
+                </th>
+                <th>
+                    @Html.DisplayName("TotalPayable")
+                </th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model.Order.OrderDetails)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cloths.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPayable)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "OrderListItem", new { orderItemId = item.Id, redirectAction = Model.RedirectAction, isOrderItemEdit = true }) |
+                        @Html.ActionLink("Delete", "OrderListItem", new { orderItemId = item.Id, redirectAction = Model.RedirectAction, isOrderItemDelete = true })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+</div>
+<div class="row">
+    @using (Html.BeginForm("MarkAsPickedUp", "Orders", new { id = Model.Order.ID, redirectAction = Model.RedirectAction }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Mark as PickedUp" class="btn btn-info ml-2" />
+    }
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $("#OrderDetail_IsUrgent").click(function () {
+            var checkBox = document.getElementById("OrderDetail_IsUrgent");
+            if (checkBox.checked == true) {
+                var ugRate = sessionStorage.getItem("urgentRate");
+                $("#OrderDetail_Price").val(ugRate);
+            } else {
+                var nrRate = sessionStorage.getItem("normalRate");
+                $("#OrderDetail_Price").val(nrRate);
+            }
+        });
+
+        $("#OrderDetail_ServiceTypeID").on("change", function () {
+            let clothId = $("#OrderDetail_ClothsID").val();
+            let serviceTypeId = $(this).val();
+
+            sessionStorage.clear();
+
+            if (clothId != "" && serviceTypeId != "") {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetPrice","Orders")",
+                    data: { clothId: clothId, serviceTypeId: serviceTypeId },
+                    success: function (response) {
+                        if (response.result == true) {
+                            sessionStorage.setItem("urgentRate", response.urgentRate);
+                            sessionStorage.setItem("normalRate", response.normalPrice);
+
+                            console.log(response);
+                            $("#OrderDetail_Price").val(response.normalPrice);
+                        } else {
+                            $("#OrderDetail_Price").val(0);
+                            $.toast({
+                                heading: 'warning',
+                                text: 'Cloth and Service Type rate is not mapped',
+                                position: 'top-right',
+                                icon: 'warning',
+                                hideAfter: 5000
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+        $("#OrderDetail_ClothsID").on("change", function () {
+            let serviceTypeId = $("#OrderDetail_ServiceTypeID").val();
+            let clothId = $(this).val();
+
+            sessionStorage.clear();
+
+            if (clothId != "" && serviceTypeId != "") {
+                 $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetPrice","Orders")",
+                    data: { clothId: clothId, serviceTypeId: serviceTypeId },
+                    success: function (response) {
+                        if (response.result == true) {
+                            sessionStorage.setItem("urgentRate", response.urgentRate);
+                            sessionStorage.setItem("normalRate", response.normalPrice);
+                            console.log(response);
+                            $("#OrderDetail_Price").val(response.normalPrice);
+                        } else {
+                            $("#OrderDetail_Price").val(0);
+                             $.toast({
+                             heading: 'warning',
+                             text: 'Cloth and Service Type rate is not mapped',
+                             position: 'top-right',
+                             icon: 'warning',
+                             hideAfter: 5000
+                          });
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}

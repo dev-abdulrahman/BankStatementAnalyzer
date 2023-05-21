@@ -1,0 +1,66 @@
+﻿@model BankStatementAnalyzer.SuperAdmin.ViewModels.Permission.PermissionVModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="col-lg-10">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Create Permission</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "Permission", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.PermissionInfo.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.PermissionInfo.Name, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                                @Html.ValidationMessageFor(model => model.PermissionInfo.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.PermissionInfo.Feature, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.PermissionInfo.Feature, new { htmlAttributes = new { @class = "form-control", @autocomplete = "Off" } })
+                                @Html.ValidationMessageFor(model => model.PermissionInfo.Feature, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label"><strong>Actions</strong></label>
+                            <div class="col-lg-10">
+                                @{
+                                    string feature = "";
+                                    foreach (var item in Model.Actions)
+                                    {
+                                        if (item.ActionInfo.Feature != feature)
+                                        {
+                                            <div class="mb-2">
+                                                <b>@item.ActionInfo.Feature</b>
+                                            </div>
+                                            feature = item.ActionInfo.Feature;
+                                        }
+                                        Html.RenderPartial("ActionEditorRow", item);
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@model BankStatementAnalyzer.BusinessLogic.ViewModels.OrderVM
+@{
+    ViewBag.Title = "Details";
+    ViewBag.MainHeading = "Order Details";
+    ViewBag.BoxHeader = "Details";
+}
+
+@{ Html.RenderPartial("OrderDetailPartial", Model);}
+
+@using (Html.BeginForm("Assign", "Orders", FormMethod.Post))
+{
+    <div class="row no-print">
+        <div class="col-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.Label("Delivery Boy", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.DeliveryBoyId, (IEnumerable<SelectListItem>)ViewBag.DeliveryBoy, "Select Delivery Boy", new { @class = "form-control", @autocomplete = "Off" })
+                        @Html.ValidationMessageFor(model => model.DeliveryBoyId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.TextAreaFor(model => model.Remark, new { @class = "form-control", @autocomplete = "Off", @cols = "80" })
+                            @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <div class="row no-print">
+        <div class="col-12">
+            <button type="submit" class="btn btn-info ml-15">
+                <i class="fa fa-check"></i>Assign For Delivery
+            </button>
+            @*<button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
+                    <i class="fa fa-remove"></i>Cancle
+                </button>*@
+        </div>
+    </div>
+}
